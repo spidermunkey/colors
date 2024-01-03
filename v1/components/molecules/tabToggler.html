@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Toggler</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .tab-toggler {
+        position: relative;
+        display: inline-block;
+        padding: 8px;
+        height: calc(50px - (50px * .25));
+        min-width: 75px;
+        /* background: blue; */
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.262);
+        background: rgba(51, 51, 51, 0.058);
+        border-radius: 10px;
+    }
+
+    .tggle {
+        padding: 8px;
+        height: 100%;
+        /* border: 1px solid black; */
+        font-size: 16px;
+        color: #444;
+        opacity: .89;
+        font-weight: 600;
+        white-space: wrap;
+        transition: 200ms ease;
+        user-select: none;
+    }
+
+    .btn-tggle {
+        position: absolute;
+        background: white;
+        height: 95%;
+        width: 50%;
+        top: 2.5%;
+        left:0;
+        z-index: 100;
+        border-radius: inherit;
+        transition: 200ms ease-in-out;
+    }
+
+    .tab-toggler.on .btn-tggle {
+        transform: translateX(100%);
+    }
+</style>
+<body>
+    <div class="tab-toggler">
+        <span class="tggle">Current</span>
+        <span class="tggle">Explore</span>
+        <span class="btn-tggle"></span>
+    </div>
+</body>
+
+<script type="text/javascript">
+    console.log('hi mom')
+    const tggle = document.querySelector('.tab-toggler');
+    tggle.onclick = function() {
+        tggle.classList.toggle('on');
+    }
+</script>
+</html>

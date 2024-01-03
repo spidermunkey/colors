@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Skin</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    html,body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dashboard-panel {
+        box-sizing: border-box;
+        padding: 16px;
+        /* border: 20px solid red; */
+        /* min-height: 300px;
+        width: 400px; */
+        border-radius: 40px;
+        max-height: 90vh;
+    }
+
+    .dashboard-panel {
+        /* DEFAULT SKIN */
+        background-color: #fefefe;
+        border: 1px solid rgba(211, 211, 211, 0.5293);
+        box-shadow: 0px 0px 4px 1px rgba(211, 211, 211, 0.5893),
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+        border-radius: 30px;
+    }
+    /* ************************************ */
+    /* THEMES */
+    /* ************************ */
+    .dashboard-panel.dark {
+        --accent: orange;
+        background: linear-gradient(30deg,rgb(18, 18, 20),rgb(14, 16, 42));
+        box-shadow: 0px 0px 8px -1px rgba(11, 11, 11, 0.5893),
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+    }
+
+    .dashboard-panel.neutral {
+        --accent: hsl(216,100%,50%);
+        box-shadow: 0px -1px 4px -3px rgba(0, 0, 0, 0.385),
+                    0 0 6px rgba(0, 0, 0, 0.0289);
+        background: #f3f3f3;
+        background: #e9e9e9;
+    }
+
+    .dashboard-panel .subtle {
+        --accent: lightcoral;
+        background: #fefefe;
+        box-shadow: 0 0 4px 1px #f9f9f979,
+            0 0 2px -1px #fefefe79,
+            inset -2px 2px 2px -1px #e9e9e979,
+            inset 2px -2px 3px -1px rgba(150, 150, 150,.267); 
+         border: 2px solid #c2c2c2;
+    }
+
+    /* ************************************ */
+    /* DIMENSIONS */
+    /* ************************ */
+
+    .db-panel--context,
+    .context {
+        min-width: 250px;
+        min-height: 200px;
+        /* aspect-ratio: 9/16; */
+        border-radius: 50%;
+    }
+
+    .context-menu--popup {
+        height: 200px;
+        width: 200px;
+    }
+
+    .context-menu {
+        width: 200px;
+        min-height: 300px;
+    }
+
+    .context-menu--sm {
+        width: 175px;
+        min-height: 250px;
+    }
+
+    .context-menu--md {
+        width: 265px;
+        min-height: 265px;
+    }
+
+    .context-menu--lg {
+        width: 300px;
+        min-height: 400px;
+    }
+
+    .context-menu--modal {
+        width: 700px;
+        min-height: 500px;
+        max-height: 90vh;
+    }
+
+    .db-panel--circ,
+    .circ {
+        min-height: 300px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+    }
+
+    .db-panel--variable {
+        min-height: 300px;
+        min-width: 400px;
+    }
+
+    .db-panel--sm,
+    .sm {
+        height: 300px;
+        width: 400px;
+    }
+
+    .db-panel--md,
+    .md {
+        height: 300px;
+        width: 700px;
+    }
+
+    .db-panel--fs,
+    .fs {
+        height: 600px;
+        width: 700px;
+    }
+
+</style>
+<body>
+    <div class="dashboard-panel context-menu">
+
+    </div>
+</body>
+</html>

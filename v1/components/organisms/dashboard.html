@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu & Breadcrumb 2</title>
+    <link rel="stylesheet" href="/styles/color-dashboard-v2.5.css">
+    <link rel="stylesheet" href="/styles/highlight-bar.css">
+
+</head>
+<body>
+    <div class="interface-panel">
+        <div class="header">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 332 512" height="24" width="24">
+                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                    <path d="M332.5 419.9c0 46.4-37.6 84.1-84 84.1s-84-37.7-84-84.1 37.6-84 84-84 84 37.6 84 84zm-84-243.9c46.4 0 80-37.6 80-84s-33.6-84-80-84-88 37.6-88 84-29.6 76-76 76-84 41.6-84 88 37.6 80 84 80 84-33.6 84-80 33.6-80 80-80z"></path>
+                </svg>    
+            </div>
+        </div>
+        <div class="content">
+            <div class="content--main">
+                
+                <div class="js-search">
+                    <input class="search-inp" type="text" placeholder="search">
+                </div>
+                    
+                <div class="nav-list home">
+                    <div class="nav-list--options">
+                        <ul>
+                            <li>All Colors</li>
+                            <li class="tab-tggler" data-tggler="palettes">Palettes</li>
+                            <li class="tab-tggler" data-tggler="collections">Collections</li>
+                            <li class="tab-tggler" data-tggler="themes">Themes</li>
+                            <li class="tab-tggler" data-tggler="gradients">Gradients</li>
+                        </ul>
+                    </div>
+                    <div class="nav-list--tabs">
+                        <div class="close">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" height="24px" width="24px" enable-background="new 0 0 50 50" xml:space="preserve">
+
+                                <path fill="#231F20" d="M9.016,40.837c0.195,0.195,0.451,0.292,0.707,0.292c0.256,0,0.512-0.098,0.708-0.293l14.292-14.309
+                                    l14.292,14.309c0.195,0.196,0.451,0.293,0.708,0.293c0.256,0,0.512-0.098,0.707-0.292c0.391-0.39,0.391-1.023,0.001-1.414
+                                    L26.153,25.129L40.43,10.836c0.39-0.391,0.39-1.024-0.001-1.414c-0.392-0.391-1.024-0.391-1.414,0.001L24.722,23.732L10.43,9.423
+                                    c-0.391-0.391-1.024-0.391-1.414-0.001c-0.391,0.39-0.391,1.023-0.001,1.414l14.276,14.293L9.015,39.423
+                                    C8.625,39.813,8.625,40.447,9.016,40.837z"></path>
+                            </svg>
+                        </div>
+                            <!-- make a div with overlapping options menus -->
+                            <div class="nav-list--tab palettes" data-tab="palettes">
+                                Palettes
+                                <ul>
+                                    <li class="page-link page-link--palette" data-target="myVault">My Vault</li>
+                                    <!-- <li class="page-link page-link--palette" data-target="truColors">Tru Colors</li> -->
+                                    <li class="page-link page-link--palette" data-target="crayola">Crayola</li>
+                                    <li class="page-link page-link--palette" data-target="crayolaExt">Crayola Extended</li>
+                                    <li class="page-link page-link--palette" data-target="ionic">Ionic</li>
+                                    <li class="page-link page-link--palette" data-target="munsell">Munsell</li>
+                                    <li class="page-link page-link--palette" data-target="ral">Ral</li>
+                                    <li class="page-link page-link--palette" data-target="ralExt">Ral Extended</li>
+                                    <li class="page-link page-link--palette" data-target="tailwind">Tailwind</li>
+                                </ul>
+                            </div>
+                            <div class="nav-list--tab collections" data-tab="collections">
+                                Collections
+                            </div>
+                            <div class="nav-list--tab themes" data-tab="themes">
+                                Themes
+                            </div>
+                            <div class="nav-list--tab gradients" data-tab="gradients">
+                                Gradients
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div class="view-panel">
+        <div class="banner-bar"></div>
+        <div class="view-panel--header">
+            <span class="label">Home</span>
+        </div>
+        
+        <div class="view-panel--section home" data-page="allColors">
+            <div class="highlight-bar">
+                <!-- <div class="arrow-left">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                        <g>  
+                        <polyline fill="none" stroke-width="3" stroke-linejoin="bevel" stroke-miterlimit="10" points="37,15 20,32 37,49"></polyline>  
+                        </g>   
+                    </svg>
+                </div> -->
+                <div class="content">
+                    <div class="content--selection">
+                        <span>My Favorites</span>
+                    </div>
+                    
+                    <div class="content--selection">
+                        <span>Recently Added</span>
+                    </div>
+                </div>
+                <!-- 
+                    <div class="arrow-right">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                        <g>
+                            <polyline fill="none" stroke-width="3" stroke-linejoin="bevel" stroke-miterlimit="10" points="27,15 44,32 27,49"></polyline>
+                        </g>    
+                    </svg>
+                </div> 
+                -->
+            </div>
+            <div class="highlight-reel">
+                <div class="highlight-panel"></div>
+                <div class="highlight-panel"></div>
+                <div class="highlight-panel"></div>
+            </div>
+            <div class="view-panel--header">
+                <span class="label">All Colors</span>
+            </div>
+            <div class="view-panel--set all-color-home">
+            </div>
+<!-- 
+            <div class="info-panel">
+                <div class="compare_rgb"></div>
+                <div class="compare_hex"></div>
+                <div class="compare_hsl"></div>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script src="../../color-API-v2.5.js" type="module"></script>
+<script src="../../tab-tggler.js"></script>
+</html>

@@ -1,0 +1,20 @@
+// PREVIEW FULLSCREEN
+.dashboard__fullscreen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: white;
+    border: red;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    transition: 200ms ease;
+    &.active {
+      background-color: white;
+      border: red;
+      opacity: 1;
+      transition: 500ms ease-in-out;
+    }
+}

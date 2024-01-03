@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inp Slider</title>
+    <link rel="stylesheet" href="css/input.css">
+</head>
+<style>
+
+.px-viewport-dimensions.tr.px-viewport-dimensions--fade-in {
+    display: none;
+}
+/* 
+@mixin pin() {
+    // round--raised container 
+    // add icon/png
+
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    transform: scale(1.25);
+    
+    box-shadow: -.125em 0 .25em #707070;
+}
+@mixin ConcaveThumb() {
+    width: 2.25em;
+    height: 2.25em;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    --------------------------
+  border: solid 0.375em #53252500;
+  border-radius: 50%;
+  box-shadow:  0 2px 5px #7d7d7d;
+  background: 
+    linear-gradient(#c5c5c5, whitesmoke) padding-box, from bottom of padding box to top remove for rounded button look
+    linear-gradient(#fbfbfb, #c2c2c2) border-box;  <= from border to padding box
+}
+
+
+@mixin innerShadow {
+    box-shadow: inset 0 1px #111,
+                inset 0 1px 2px #111;
+}
+margin-top: -0.25em;
+box-sizing: border-box;
+border: solid 0.375em transparent;
+width: 1.25em;
+height: 1.25em;
+border-radius: 50%;
+box-shadow: inset 0 1px #111, inset 0 1px 2px #111, 0 0 0 1px #000, 0 1px 2px #101010;
+background: linear-gradient(#99c0df, #0082e7, #3293de) padding-box, linear-gradient(#717171, #262626) border-box;
+cursor: ew-resize;
+*/
+
+/* box-sizing: border-box;
+border: solid calc(1.25em/(1 + var(--inner, 0))) transparent;
+width: 2.5em;
+height: 2.5em;
+border-radius: 50%;
+box-shadow: inset 0 1px 2px #222, 0 0.375em 0.375em #000;
+background: radial-gradient(#00fc6b 0 0) padding-box, radial-gradient(circle at 50% calc(50% + 3px), transparent 1.25em, rgba(255, 255, 255, 0.2) calc(1.25em + 1px)) border-box, repeating-conic-gradient(#9e9e9e, #5c5c5c, #9e9e9e 120deg) border-box; */
+
+/* 
+ --ang: calc(var(--k)*90deg);
+box-sizing: border-box;
+border: none;
+padding: calc(var(--pdy)*3px) calc(var(--pdx)*3px);
+width: var(--thumb-w);
+height: var(--thumb-h);
+border-radius: var(--thumb-r);
+box-shadow: 0 0 0 1px #a2a2a2, inset calc(var(--k)*-2px) calc(var(--not-k)*2px) 2px #fafafa, inset calc(var(--k)*2px) calc(var(--not-k)*-2px) 2px #8b8b8b;
+background: linear-gradient(var(--ang), #eee, #b4b4b4) 50%/calc(Min(1, calc(var(--pdx) + var(--pdy)))*100%) 100% content-box, linear-gradient(var(--ang), #b5b5b5, #fefefe);
+*/
+
+/* 
+    --layer: linear-gradient(-60deg, #d5d5d5, #f0f0f0 70%);
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    transform: scale(calc((var(--not-hl)*.5 + var(--hl))*2.5));
+    box-shadow: -.125em 0 .25em #707070, inset -1px -1px 1px -1px #b7b7b7, inset 1px -1px 1px -1px #d3d3d3, inset 1px -1px 1px #e3e3e3;
+    background: var(--layer) padding-box, var(--layer) border-box;
+    transition: transform 0.3s;
+*/
+:root {
+    /* dimensions */
+    --track-width: 150px;
+    --track-height: 8px;
+    --track-radius: 8px;
+    --track-color: blue;
+    --track-gutter: none; /* SHADOW */
+    --track-border: none;
+    --track-position: var(--track_center);
+
+    /* For linear gradients */
+    /* 
+        &::-webkit-slider-runnable-track,  <== progress
+        &::-webkit-slider-thumb { -webkit-appearance: none } 
+        
+          &::-webkit-slider-runnable-track { margin: -$input-p } <== progress margin
+        */
+
+        /* &::-webkit-slider-runnable-track { margin: -$input-p } */
+    --track-background: linear-gradient(#f8dd36, #d68706) 
+      0/ var(--pos) no-repeat, 
+
+
+    linear-gradient(#efefef, #c9c9c9);
+
+    --track_center: calc((var(--handle-size)/2) - (var(--track-height)/2));
+    --track_full: 0;
+            /* full track = height:handle-height: + top: 0;*/
+            /* center track = calc((var(--handle-size)/2) - (var(--track-height)/2)) */
+    --progress-color: blue;
+    --progress-value: 0;
+    --scroll-width: calc(var(--track-width) * 2);
+
+    --handle-color: black;
+    --handle-size: 24px; /* HEIGHT */
+    --handle-ratio: 1; /* ASPECT RATIO */
+    --handle-shape: 9px; 
+    --handle-border: none;
+}
+
+html,body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(128, 128, 128, 0.321);
+    margin: 16px;
+    padding: 4rem;
+    border-radius: 1rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    display: block;
+    text-align: center;
+}
+
+/* --------------------------------------- */
+/* USING DEFAULT INPUT ELEMENT */
+/* NON STANDARD */
+/* --------------------------------- */
+
+/********** Range Input Styles **********/
+
+/*Range Reset*/
+input[type="range"] {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+
+    /* 
+        For full width track appearance 
+        remove track background
+        Use input background and shadows instead
+
+    */
+    /* box-shadow: 0 -1px #eaeaea, 0 1px #fff; */
+
+    /* background: linear-gradient(#c3c3c3, #f1f1f1); */
+    cursor: pointer;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+   background-color: var(--track-color);
+   border-radius: var(--track-radius);
+   height: var(--track-height);  
+}
+
+input[type="range"]::-webkit-slider-container {
+    /* background: var(--track-background); */
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: var(--track-position);
+
+   /*custom styles*/
+   background-color: var(--handle-color);
+   height: var(--handle-size);
+   width: calc(var(--handle-size) * var(--handle-ratio));
+}
+
+
+input[type="range"]:focus::-webkit-slider-thumb {   
+  /* border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;  */
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+   background-color: var(--track-color);
+   border-radius: var(--track-radius);
+   height: var(--track-height);  
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+   border: var(--handle-border); /*Removes extra border that FF applies*/
+   border-radius: var(--handle-shape); /*Removes default border-radius that FF applies*/
+
+   /*custom styles*/
+   background-color: var(--handle-color);
+   height: var(--handle-size);
+   width: calc(var(--handle-size) * var(--handle-ratio));
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  /* border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;  */
+}
+/* 
+
+Type 1 
+    Handle and scrubber contained inside of the padding-box
+    Trailing progress bar behind button
+    Contained by overflow hidden set to the min-height/width container
+
+*/
+.v01 {
+    position: relative;
+    /* border: 1px solid red; */
+    display: inline-block;
+}
+
+.v01 .container { 
+    position: relative;
+    /* background: lightgray; */
+    /* border: 1px solid red; */
+}
+
+.v01 .range {
+    position: relative;
+    box-sizing: content-box;
+    height: 16px;
+    width: 150px;
+    /* background: transparent; */
+    background: lightgray;
+    opacity: .5;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px black;
+    /* z-index: 9; */
+    overflow: hidden;
+    /* background-clip: border-box; */
+}
+
+.v01 .handle {
+    box-sizing: content-box;
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    /* background: transparent; */
+    /* border: 1px solid black; */
+    border-radius: 16px;
+    transition: 1000ms ease;
+    z-index: 2;
+}
+.v01 .handle:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 1px;
+    right: 1px;
+    background: white;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.267),
+                0 0 0px 1px black;
+    pointer-events: none;
+    border-radius: 16px;
+}
+.v01 .handle:after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    background-color: lightblue;
+    height: 16px;
+    right: 0;
+    z-index: -1;
+    border-radius: 16px;
+    /* pointer-events: none; */
+}
+
+.v01 .handle:hover {
+    transform: translate3d(67px,0,0);
+}
+
+/* -------------------------------- */
+/* 
+    Type 2
+
+    Inspired by google
+
+    Tall Container with clipped background
+    Single button handle element
+    Before element representing current progress
+    After element representing progress left
+    
+*/
+
+.v02 {
+    border-radius: 8px;
+    height: 40px;
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.47);
+}
+
+.v02 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+    /* background: red; */
+}
+.v02 .handle {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: white;
+    transition: 1000ms ease;
+    z-index: 100000;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.386);
+}
+
+.v02 .handle:after {
+    content: "";
+    position: absolute;
+    height: 8px;
+    width: 175px;
+    left: -175px;
+    top: 8px;
+    background: lightcoral;
+}
+.v02 .handle:before {
+    content: "";
+    position: absolute;
+    height: 8px;
+    width: 175px;
+    left: 24px;
+    top: 8px;
+    background: rgb(98, 98, 98);
+}
+
+.v02:hover .handle {
+    transform: translateX(-63px);
+}
+
+/* 
+    Type 3
+    --
+    Overflowing Handle
+    
+    3 stacked divs
+      -Track
+      -Progress
+      -Handle
+
+    Inside one input container
+*/
+
+.v03 {
+    padding: 16px;
+    background: gray;
+}
+
+.v03 .range {
+    /* Positioning the track/progress/handle */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 176px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.v03 .track {
+    left: 14px;
+    position: absolute;
+    border-radius: 8px;
+    height: .7em;
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.47);
+}
+
+.v03 .handle {
+    left: 14px;
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid black;
+    /* transform: translateX(-50%); */
+    transition: .2s cubic-bezier(0.4,0,1,1);
+
+}
+
+.v03 .progress {
+    position: absolute;
+    height: .7em;
+    width: 150px;
+    left: 14px;
+    border-radius: 16px;
+    background: coral;
+    transform-origin: left center;
+    width: 0;
+    transition: width .2s cubic-bezier(0.4,0,1,1);
+    /* margin .2s cubic-bezier(0.4,0,1,1) */
+}
+
+.v03:hover .progress {
+    width: 75px;
+} 
+
+.v03:hover .handle {
+    transform: translateX(calc(75px - 12px))
+}
+
+
+/* STRUCTURE */
+
+.s01 {
+    /* dimensions */
+    --track-width: 150px;
+    --track-height: 8px;
+    --track-radius: 8px;
+    --track-color: lightgrey;
+    --track-gutter: none; /* SHADOW */
+    --track-border: none;
+    --track-position: var(--track_center);
+
+    --track_center: calc((var(--handle-size)/2) - (var(--track-height)/2));
+    --track_full: 0;
+            /* full track = height:handle-height: + top: 0;*/
+            /* center track = calc((var(--handle-size)/2) - (var(--track-height)/2)) */
+    --progress-color: blue;
+    --progress-value: 0;
+    --scroll-width: calc(var(--track-width) * 2);
+
+    --handle-color: white;
+    --handle-size: 24px; /* HEIGHT */
+    --handle-ratio: 1; /* ASPECT RATIO */
+    --handle-shape: 50%; /* BORDER-RADIUS */
+    --handle-border: none;
+}
+.s01.input-slider {
+    /* main container */
+    padding: 8px;
+    /* ----------------------- */
+    background: salmon;
+}
+
+.s01 .range {
+    position: relative;
+    height: var(--handle-size);
+    width: var(--track-width);
+    overflow: hidden;
+    /* ------------------------ */
+    background: lightsalmon;
+}
+
+.s01 .handle {
+    position: absolute;
+    left: 0;
+    height: var(--handle-size);
+    aspect-ratio: var(--handle-ratio);
+    /* ----------------------- */
+    background: white;
+}
+
+.s01 .track {
+    position: absolute;
+    left: 0;
+    top: var(--track-position);
+    width: var(--track-width);
+    height: var(--track-height);
+    /* ----------------------- */
+    background-color: var(--track-color);
+}
+
+.s01 .progress {
+    position: absolute;
+    left: 0;
+    top: var(--track-position);
+    width: var(--progress-value);
+    height: var(--track-height);
+    /* ------------------------ */
+    background-color: var(--progress-color);
+}
+
+/* ---------------------------------------- */
+.s01 .handle,
+.s01 .progress {
+    transition: .2s cubic-bezier(0.4,0,1,1);
+}
+
+.s01:hover .handle {
+    left: calc(75px - 12px);
+}
+.s01:hover {
+    --progress-value: 75px;
+}
+
+</style>
+<body>
+    <div class="col-1">
+        <label for="">Warmup (Basic Sliders)</label>
+    <div class="section sec1">
+        <div class="inp-slider v01 filled">
+            <div class="container">
+            <!-- <div class="id">One range representing the track with a handle and a before (progress) element trailing behind</div> -->
+                <div class="range">
+                    <div class="handle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section sec2">
+        <div class="inp-slider v02 attatched">
+            <div class="container">
+            <!-- <div class="id">One handle container with a before (progress) and after (track) element trailing the position</div> -->
+                <div class="range">
+                    <div class="handle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section sec3">
+        <div class="inp-slider v03 stacked">
+            <!-- <div class="test 03">one range element with divs (track,progress,handle) inside</div> -->
+                <div class="range">
+                    <div class="track"></div>
+                    <div class="progress"></div>
+                    <div class="handle"></div>
+                </div>
+        </div>
+    </div>
+    
+    <div class="section control">
+        <!-- 
+            FIRE FOX MODIFIERS
+            ::-moz-range-track
+            ::-moz-range-progress
+            ::-moz-range-thumb
+
+
+            ** NOTABLES
+            https://css-tricks.com/sliding-nightmare-understanding-range-input/
+
+            TLDR: Set these explicitly for consistency
+                color,
+                margin,
+                padding,
+                font-size,
+                border,
+                background-color,
+                TRACK -- box-sizing
+                
+                width = em/font-size in Firefox
+                chrome track width = parent width
+                edge & firefox track width = track width ==> in firefox it will overflow but still be limited or scale yet still move along the min/max values
+                set everything to fit the content box
+
+                height = height
+                chrome height adds to the parent height if % is not used and fit snugly inside of the parent
+                if pct is used it will stay centered
+
+                edge height is centered if smaller than parent height
+
+                Thumb traverses its content box which fits inside the border-box of the input respective of padding
+                Input (parent) padding wins
+                NO PADDING ON THE TRACK
+                TOP OF BORDERBOX = TOP OF CONTENT BOX FOR TRACK
+            *********************************
+            -> setting properties such as opacity or filter or even transform
+               on the track would also affect the thumb in Chrome and Edge 
+               (where it’s a child/ descendant of the track), 
+               but not in Firefox (where it’s its sibling)
+               ***************************
+            -> All styles must be set individualy
+                -----WONT WORK WITH COMMAS-----
+               input::-webkit-slider-runnable-track, 
+               input::-moz-range-track, 
+               input::-ms-track { /* common styles */ }
+                -----USE SASS-----
+                @mixin track() { /* common styles */ }
+                
+                input {
+                &::-webkit-slider-runnable-track { @include track }
+                &::-moz-range-track { @include track }
+                &::-ms-track { @include track }
+                }
+                ****************************
+             -> All browsers use box-sizing: content-box-
+                ****************************
+             -> By default, the margin is 
+                -2px in Chrome and Edge 
+                -and 0 .7em in Firefox.
+                ****************************
+             -> Computed values change in one of the following situations:
+                -When changing the font-size on the input or on the html
+                (which entails it is set as an em or rem value)
+                --13.3333px in Firefox & Chrome--
+                --16px in Edge--
+                (it seems to have been set as such and doesn’t depend on the viewport dimensions or on the parent or root font-size.)
+
+                -When changing the viewport
+                (which indicates the value was set using % or viewport units)
+                ****************************
+             -> This means margin needs to be set explicitly in the input[type='range'] 
+                if we want to achieve a consistent look across browsers.
+                ****************************
+             -> Color is set to 
+                rgb(196,196,196) (silver) in Edge & Firefox
+                rgb(0,0,0) in Chrome
+                ****************************
+              -> Border is set to
+                 none medium currentcolor (values for border-style, border-width and border-color)
+              -> Padding is set to 
+                 0 Chrome & Edge
+                 1px Firefox
+         -->
+        <input type="range" name="" id="">
+    </div>
+</div>
+<div class="col-2">
+    <label for="">Basic Structure</label>
+    <div class="section sec4">
+        <div class="input-slider s01">
+            <!-- uses config attributes -->
+            <!-- defines dimensions of the slider -->
+            <div class="range">
+                <!-- contains elements with relative positioning to root component -->
+                <!-- positions elements with padding -->
+                <!-- width == track-width -->
+                <!-- captures click events -->
+                <!-- captures wheel events -->
+                <div class="track"></div>
+                    <!-- fixed positioned visual component -- progress left -->
+                <div class="progress"></div>
+                <!-- dynamic width -->
+                <!-- max-width = track-width -->
+                <div class="handle"></div>
+                <!-- dynamic left -->
+                <!-- max-left = track-width -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-3">
+    <label for="">The Skin</label>
+    <div class="col-3a">
+        <label for="">Handles</label>
+        <div class="section sec5">
+            <div class="iso handle concave"></div>
+        </div>
+        <div class="section sec6">
+            <div class="iso handle holy"></div>
+        </div>
+        <div class="section sec7">
+            <div class="iso handle metallica"></div>
+        </div>
+        <div class="section sec8">
+            <div class="iso handle metallica metallica-02"></div>
+        </div>
+        <div class="section sec9">
+            <div class="iso handle smooth round"></div>
+        </div>
+        <div class="section sec10">
+            <div class="iso handle smooth pill"></div>
+        </div>
+        <div class="section sec11">
+            <div class="iso handle pill concave-pill"></div>
+        </div>
+        <div class="section sec12">
+            <div class="iso handle lipped-handle"></div>
+        </div>
+        <div class="section sec13">
+            <div class="iso handle gloss-finish"></div>
+        </div>
+    </div>
+    <!-- <div class="col-3b">
+        <label for="">Tracks and Progress</label>
+    </div>
+    <div class="col-3c">
+        <label for="">Shapes and Shadows</label>
+    </div> -->
+
+</div>
+    <!-- 
+        Conclusion (Test 1): In test where visual progress is determined sole by before and after elements, there are a few quirks that I started noticing at 200% zoom
+                    
+                    // Using Pseudo Elements
+                    1) because psuedo elements are positioned inside of the handle element it is hard to stack them properly behind the handle without stacking them behind the background itself
+                    2) because of the inherited stacking context the retangular shape of the tracks do not suite a circular handle as they become noticably separated
+                    3) it could be somewhat faster/easier to implement and animate as the only transformation to track is the handle itself
+                    4) it also allows for the handle to fit perfectly inside of the track for (somewhat) simpler calculations
+                        --Takeaway-- 
+                        It may be better to use psuedo elements for supplemental style/skin choices as opposed to visual representations of progress, 
+                        using a square/rect handle may correct many of the problems visually however I'm sure these are only shallow problems that get worse as you add more complexity to the component
+                    
+                    // Using separate containers
+                    1) because each component is its own element, transitioning between states involves multiple transforms and calculations
+                    2) also separate containers involves absolute positioning which involves a bit more precision and consideration when doing calculations
+                    3) Firefox uses the 3 div approach but they are all positioned with static positioning which may mean that I could be missing something fundamental in terms of cross-browser compatibity and performance
+                    4) because I used absolute positioning, the container does not have a width unless specifically set
+    -->
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Panel</title>
+</head>
+<style>
+     * {
+        box-sizing: border-box;
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        justify-content: space-between;
+        justify-content: flex-start;
+        background: white;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.186);
+        border-radius: 10px;
+        padding: 1.5rem;
+    }
+
+    .title-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title-group .title {
+        font-size: 32px;
+        /* font-style: oblique; */
+        color: #5a96ff;
+        font-weight: 600;
+        margin-top: 8px;
+    }
+
+    .tab-toggler {
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 2px 8px;
+        /* padding: 8px; */
+        height: calc(50px - (50px * .25));
+        width: 200px;
+        /* background: blue; */
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.262);
+        background: rgba(51, 51, 51, 0.058);
+        border-radius: 10px;
+    }
+
+    .tggle {
+        padding: 8px;
+        height: 100%;
+        /* border: 1px solid black; */
+        font-size: 16px;
+        color: #444;
+        opacity: .89;
+        font-weight: 600;
+        white-space: wrap;
+        transition: 200ms ease;
+        user-select: none;
+    }
+
+    .btn-tggle {
+        position: absolute;
+        background: white;
+        height: 95%;
+        width: 50%;
+        top: 2.5%;
+        left:0;
+        z-index: 100;
+        border-radius: inherit;
+        transition: 200ms ease-in-out;
+    }
+
+    .tab-toggler.on .btn-tggle {
+        transform: translateX(100%);
+    }
+
+    .search-group {
+        display: flex;
+    }
+    .search-bar {
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+    }
+    .search-bar {
+        height: 60px;
+        min-width: 300px;
+        border-radius: 30px;
+        /* background: rgba(0, 0, 0, 0.128); */
+        background: rgba(146, 146, 146, 0.086);
+    }
+
+    .search-bar input {
+        height: 100%;
+        background: transparent;
+        outline: 0;
+        border: 0;
+        /* border: 1px solid black; */
+        color: rgba(68, 68, 68, 0.641);
+        font-weight: 400;
+        letter-spacing: 1px;
+        font-size: 16px;
+        font-family: inherit;
+    }
+
+    .search-group .icon-btn {
+        height: 39px;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        background: rgba(146, 146, 146, 0.086);
+        margin-left: 16px;
+        box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.0862);
+
+    }
+
+    .icon-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        stroke: #828286;
+        color: #828286;
+    }
+
+    .icon-btn svg {
+        height: 24px;
+        stroke: #828286;
+        opacity: .89;
+    }
+
+    .icon svg {
+        height: 24px;
+        fill: #6e6d7a;
+    }
+
+    #search {
+        margin-right: 8px;
+        scale: .8;
+    }
+
+    .icon.gs-lite svg {
+        stroke: #828286;
+        color: #828286;
+    }
+
+    .search-bar.active {
+        box-shadow: 0px 1px 0px 1px rgba(146, 146, 146, 0.12862);
+        /* border: 2px solid blue; */
+    }
+
+    .search-results {
+        position: absolute;
+        top: calc(8rem + 40px);
+        height: 500px;
+        width: 300px;
+        /* border: 1px solid rgba(0, 0, 0, 0.359); */
+        box-shadow: 0px 0px 4px 1px rgba(146, 146, 146, 0.1862),
+                    0px 0px 8px 2px rgba(146, 146, 146, 0.0862);
+
+
+        border-radius: 30px;
+    }
+</style>
+<body>
+    <div class="header">
+        <!-- <div class="title-group">
+            <div class="tab-toggler">
+                <span class="tggle">Current</span>
+                <span class="tggle">Explore</span>
+                <span class="btn-tggle"></span>
+            </div>
+
+            <div class="title">Dodger Blue</div>
+        </div> -->
+        
+        <div class="search-group">
+            <div class="search-bar">
+                <div class="icon gs-lite" id="search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+                </div>
+                <input placeholder="Search Here..."></input>
+            </div>
+            <!-- <div class="icon-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 128h80M64 128h240M368 384h80M64 384h240M208 256h240M64 256h80"/>
+                    <circle cx="336" cy="128" r="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                    <circle cx="176" cy="256" r="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                    <circle cx="336" cy="384" r="32" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                </svg>
+            </div> -->
+
+            <div class="search-results"></div>
+        </div>
+    </div>
+</body>
+</html>

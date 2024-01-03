@@ -1,0 +1,130 @@
+@import './utils/main.scss';
+@import './components/main.scss';
+@import './utils/mediaQuery';
+
+:root {
+
+  --current-background: #fff;
+  --current-wallpaper: #fff;
+  --current-heading: var(--current-color);
+  --current-title: #000;
+  --current-heading: #000;
+  --current-support: #000;
+  --current-body: #000;
+  --current-iconStroke: var(--current-color);
+  --current-iconFill: var(--current-color);
+  --current-accent: #00000000;
+  --current-contrast: white;
+  --current-sat: 0%;
+  --current-light: 100%;
+  --current-opac: 1;
+  --current-huePCT: 0;
+  --current-hue: 216deg;
+  --current-hex: #fff;
+  --current-color: hsla(var(--current-hue),var(--current-sat),var(--current-light),var(--current-opac));
+  --cp--width: 200px;
+  --cp-pointer--width: calc(var(--cp--width) * .1);
+  --cp-pointer--pos: calc(0deg + var(--current-hue));  
+
+  --current-color-primary-font: color-mix(in srgb, var(--current-color) 55%, var(--current-contrast) 45%);
+  --current-color-secondary-font: color-mix(in srgb, var(--current-color) 25%, var(--current-contrast) 75%);
+  --current-color-hover-font: color-mix(in srgb, var(--current-color) 35%, var(--current-contrast) 65%);
+
+  --current-tint--100: color-mix(in srgb, var(--current-color) 5%, white 95%);
+  --current-tint--200: color-mix(in srgb, var(--current-color) 15%, white 85%);
+  --current-tint--300: color-mix(in srgb, var(--current-color) 25%, white 75%);
+  --current-tint--400: color-mix(in srgb, var(--current-color) 35%, white 65%);
+  --current-tint--500: color-mix(in srgb, var(--current-color) 45%, white 55%);
+  --current-tint--600: color-mix(in srgb, var(--current-color) 55%, white 45%);
+  --current-tint--700: color-mix(in srgb, var(--current-color) 65%, white 35%);
+  --current-tint--800: color-mix(in srgb, var(--current-color) 75%, white 25%);
+  --current-tint--900: color-mix(in srgb, var(--current-color) 85%, white 15%);
+  --current-tint--1k: color-mix(in srgb, var(--current-color) 95%, white 5%);
+
+  --current-shade--100: color-mix(in srgb, var(--current-color) 5%,  black 95%);
+  --current-shade--200: color-mix(in srgb, var(--current-color) 15%,  black 85%);
+  --current-shade--300: color-mix(in srgb, var(--current-color) 25%,  black 75%);
+  --current-shade--400: color-mix(in srgb, var(--current-color) 35%,  black 65%);
+  --current-shade--500: color-mix(in srgb, var(--current-color) 45%,  black 55%);
+  --current-shade--600: color-mix(in srgb, var(--current-color) 55%,  black 45%);
+  --current-shade--700: color-mix(in srgb, var(--current-color) 65%,  black 35%);
+  --current-shade--800: color-mix(in srgb, var(--current-color) 75%,  black 25%);
+  --current-shade--900: color-mix(in srgb, var(--current-color) 85%,  black 15%);
+  --current-shade--1k: color-mix(in srgb, var(--current-color) 95%,  black 5%);
+
+  --zbase: 100;
+  --zbottom: 999;
+  --ztop: 1000;
+  --zfloat: 9999;
+
+  --context-x: 0;
+  --context-y: 0;
+
+  // sidebar gradient = sbg
+  --sbgDegrees: 180deg;
+  --sbg-s1: #fff;
+
+  --sbg-s2: #fff;
+  --sbg-s2: #fff;
+  --sbg-s3: #fff;
+  --sbg-s4: #fff;
+  --sbg-s5: #fff;
+  --sbg-s6:#fff;
+
+  --gDegrees: 180deg;
+  --s1: var(--sbg-s1);
+  --s2: var(--sbg-s2);
+  --s3: var(--sbg-s3);
+  --s4: var(--sbg-s4);
+  --s5: var(--sbg-s5);
+
+  --sbg-gradient: linear-gradient(#fff,#fff),
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html, body {
+
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#app {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.context-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  // pointer-events: none;
+  // opacity: 0;
+}
+
+.btn.favit.isFav,
+.btn.like.isFav {
+  svg {
+    fill: yellow;
+  }
+}

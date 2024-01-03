@@ -1,0 +1,94 @@
+.bwVariations {
+
+    --hue: 0;
+    --sat: 0%;
+    --light: 0%;
+    --opac: .97;
+    --color: hsla();
+    position: absolute;
+    top: 2px;
+    right: -91px;
+    padding: 10px;
+    width: 80px;
+    height: 300px;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: 50ms ease;
+    background-color: white;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.219);
+    border-radius: 10px;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transition: 200ms ease 50ms;
+    }
+
+    .current-variations {
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to bottom, black 50%,white 50%);
+        border-radius: 6px;
+        box-shadow: 0px 0px 4px 1px rgba(211, 211, 211, 0.7893),
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+    }
+
+    .var {
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid #ccc;
+        height: 10%;
+        box-shadow: 0px 0px 4px -1px rgba(61, 61, 61, 0.493),
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+    
+        // opacity: 0;
+        background: hsla(var(--hue),var(--sat),var(--light),var(--opac));
+        transition: background-color 80ms ease-in-out;
+
+
+        &.v100 {
+            --light: 100%;
+        }
+        &.v200 {
+            --light: 90%;
+        }
+        &.v300 {
+            --light: 80%;
+        }
+        &.v400 {
+            --light: 70%;
+        }
+        &.v500 {
+            --opac: .95;
+            --light: 60%;
+        }
+        &.v600 {
+            --opac: .94;
+            --light: 50%;
+        }
+        &.v700 {
+            --opac: .93;
+            --light: 40%;
+        }
+        &.v800 {
+            --opac: .92;
+            --light: 30%;
+        }
+        &.v900 {
+            --opac: .91;
+            --light: 20%;
+        }
+        &.v1k {
+            --opac: .9;
+            --light: 10%;
+        }
+
+        &:hover {
+            --opac: 1;
+        }
+        }
+}

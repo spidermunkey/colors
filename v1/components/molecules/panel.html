@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Struct</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body,html {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgba(68, 68, 68, 0.937);
+    }
+
+    
+
+    .column {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.0188);
+    }
+
+    .row {
+        position: relative;
+        display: flex;
+    }
+
+    .col-1 {
+        margin: 1rem auto;
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .col-2 {
+        margin-left: 2rem;
+        width: 75%;
+        /* height: 500px; */
+        overflow-x: hidden;
+        margin: 2rem auto;
+        z-index: -1;
+    }
+
+    .panel-intro {
+        height: 100%;
+    }
+    .panel-intro {
+        justify-content: flex-start;
+    }
+    .panel-desc {
+        padding: 0 1rem;
+        height: 100%;
+        width: 400px;
+        line-height: 2;
+        overflow-y: scroll;
+        margin-right: 4rem;
+    }
+
+    .panel-example {
+        flex: 1;
+        background: transparent;
+    }
+    .title {
+        margin: 1rem auto;
+    }
+    p {
+        margin: 0;
+    }
+
+    .panel {
+        /* Structure */
+        position: relative;
+        margin: 16px;
+        width: 300px;
+        height: 300px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .panel .header,
+    .panel .footer {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .panel .header:hover,
+    .panel .footer:hover, 
+    .panel .content:hover {
+        background: rgba(0, 0, 0, 0.15);
+    }
+
+    .panel .header {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+
+    .panel .footer {
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+
+    .panel .content {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+    }
+
+    .panel {
+        /* Skin */
+        border: 1px solid rgba(211, 211, 211, 0.5293);
+        box-shadow: 0px 0px 4px 1px rgba(211, 211, 211, 0.5893),
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+        border-radius: 20px;
+        background: white;
+    }
+
+    .panel.md {
+        min-width: 200px;
+        max-width: 50%;
+        flex: 1;
+        height: 250px;
+    }
+
+    .panel.lg {
+        width: 100%;
+        min-height: 300px;
+        flex: 1
+    }
+</style>
+<body>
+    <!-- Expand to max width of column with 8px margin -->
+    <div class="col-1 column">
+        <div class="row panel-intro">
+            <div class="panel-desc column">
+                <h2 class="title">Panel Structure</h2>
+                <p class="desc">
+                    <strong>Layout:</strong> Flex Column
+                    <br>
+                    <strong>Sections:</strong> Header | Content | Footer
+                    <br>
+                    <strong>Header/Footer Height:</strong> Text Padding: 1step
+                    <br>
+                    <strong>Header/Footer Layout:</strong> Row - Space Between
+                    <br>
+                    <strong>Content:</strong> Stretch
+                </p>
+                <h2 class="title">Panel Skin</h2>
+                <p class="desc">
+                    <strong>Rounded Border:</strong> 20px
+                    <br>
+                    <strong>Background:</strong> White
+                    <br>
+                    <strong>Shadow:</strong>
+                    <br>
+                    0px 0px 4px 1px rgba(211, 211, 211, 0.5893),
+                    <br>
+                    inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+                    <br>
+                    <strong>Border:</strong> 1px solid rgba(211, 211, 211, 0.5293);
+                </p>
+            </div>
+            <div class="column panel-example">
+                <div class="panel">
+                    <div class="header">
+                        <span class="panel-title">Panel Header</span>
+                        <span class="options">Options</span>
+                    </div>
+                    <div class="content">
+                        Content
+                    </div>
+                    <div class="footer">
+                        <span class="panel-footer--txt">Footer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-2 column">
+        <div class="row">
+            <div class="panel md"></div>
+            <div class="panel md"></div>
+        </div>
+
+        <div class="row">
+            <div class="panel lg"></div>
+        </div>
+    </div>
+
+</body>
+</html>

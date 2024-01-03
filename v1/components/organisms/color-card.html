@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Card</title>
+    <link rel="stylesheet" href="/styles/color-dashboard--v2.css">
+</head>
+<body>
+
+    <div class="interface-panel">
+        <div class="header">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 332 512" height="24" width="24">
+                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                    <path d="M332.5 419.9c0 46.4-37.6 84.1-84 84.1s-84-37.7-84-84.1 37.6-84 84-84 84 37.6 84 84zm-84-243.9c46.4 0 80-37.6 80-84s-33.6-84-80-84-88 37.6-88 84-29.6 76-76 76-84 41.6-84 88 37.6 80 84 80 84-33.6 84-80 33.6-80 80-80z"></path>
+                </svg>    
+            </div>
+        </div>
+        <div class="content">
+            <div class="content--main">
+                <div class="js-search">
+                    <input class="search-inp" type="text" placeholder="search">
+                </div>
+                <div class="crumb">Colors</div>
+                <div class="current-hex">#1d90f5</div>
+                <div class="color-card">
+                    <div class="current-color">#1d90f5</div>
+                    <div class="current-variations">
+                        <div class="v5" data-role="tnt" data-var="100"></div>
+                        <div class="v4" data-role="tnt" data-var="200"></div>
+                        <div class="v3" data-role="tnt" data-var="300"></div>
+                        <div class="v2" data-role="tnt" data-var="400"></div>
+                        <div class="v1" data-role="tnt" data-var="500"></div>
+                    </div>
+                    <div class="current-title">Anywhere Blue</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <div class="view-panel">
+        <div class="view-panel--section" data-panel="blue">
+            <div class="view-panel--header">
+                <span class="label">Blues</span>
+            </div>
+            <div class="view-panel--set">
+                <!-- <div class="view-panel--clr" data-clr="1"></div>
+                <div class="view-panel--clr" data-clr="2"></div>
+                <div class="view-panel--clr" data-clr="3"></div>
+                <div class="view-panel--clr" data-clr="4"></div>
+                <div class="view-panel--clr" data-clr="5"></div>
+                <div class="view-panel--clr" data-clr="6"></div>
+                <div class="view-panel--clr" data-clr="7"></div>
+                <div class="view-panel--clr" data-clr="8"></div>
+                <div class="view-panel--clr" data-clr="9"></div>
+                <div class="view-panel--clr" data-clr="10"></div> -->
+            </div>
+<!-- 
+            <div class="info-panel">
+                <div class="compare_rgb"></div>
+                <div class="compare_hex"></div>
+                <div class="compare_hsl"></div>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script src="../../color-API-v2.js" type="module"></script>
+</html>
