@@ -1,0 +1,62 @@
+.a2c_modal {
+    /* Skin */
+    border: 1px solid rgba(211, 211, 211, 0.5293);
+    box-shadow: -1px 0px 4px 0px rgba(211, 211, 211, 0.5893);
+
+                // inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
+    border-radius: 30px;
+    background: #fefefe;
+    position: absolute;
+    margin-left: 16px;
+    top: 0;
+    left: 100%;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding: 10px;
+    height: 400px;
+    width: 230px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    &.active {
+        pointer-events: all;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    ul.menu-items {
+        width: 100%;
+        margin: 0;
+        padding: 10px 12px;
+        list-style: none;
+        li {
+            width: 100%;
+            padding-left: 12px;
+            border-radius: 4px;
+            transition: 200ms;
+            margin: 8px 0;
+            // background-color: blue;
+            &:hover {
+                background: #cccccc8f;
+                cursor: pointer;
+            }
+            span {
+                height: 40px;
+                line-height: 40px;
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                vertical-align: middle;
+                color: $passiveBlackFont;
+                cursor: pointer;
+                text-transform: capitalize;
+
+
+                font-size: 20px;
+                font-weight: 600;
+                white-space: nowrap;
+                color: #7e7e7e;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+}

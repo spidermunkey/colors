@@ -1,0 +1,64 @@
+.ccModal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 100000;
+    pointer-events: none;
+    visibility: hidden;
+    transition: 200ms ease;
+  
+    .ccForm {
+      margin: auto 300px;
+      margin-top: 100px;
+      min-width: 300px;
+      max-width: fit-content;
+      background:white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      padding-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px 0 rgba(27, 31, 35, 0.08), 0 1px 2px 0 rgba(27, 31, 35, 0.1);
+  
+      & > form > div { 
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      .submit button {
+        height: 40px;
+      }
+  
+      textarea,input {
+        margin: 10px 0px;
+        padding: 8px;
+  
+        outline: none;
+        border: 1px solid #cccccc8f;
+        border-radius: 4px;
+      }
+  
+      input {
+        font-size: 18px;
+      }
+  
+      textarea {
+        height: 135px;
+      }
+  
+      label {
+        font-family: Arial, Helvetica, sans-serif;
+        color: $passiveBlackFont;
+      }
+  
+    }
+  
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      background: rgba(147, 147, 147, 0.322);
+    }
+  }
+  

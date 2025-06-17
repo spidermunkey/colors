@@ -1,35 +1,36 @@
 {
   "name": "colors",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel public/index.html --dist-dir development -p 3333",
-    "build": "parcel build public/index.html --dist-dir dist --public-url ./"
+    "dev": "vite",
+    "start": "npx json-server ./db/database.json --port 8080",
+    "clean": "rm -rf node_modules .vite dist; npm install; npm run dev",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.3.6",
-    "body-parser": "^1.20.2",
-    "chalk": "^5.2.0",
-    "express": "^4.18.2",
-    "nodemon": "^2.0.22",
-    "parcel": "^2.8.3",
-    "ramda": "^0.29.0",
-    "sass": "^1.62.0"
+    "@tailwindcss/vite": "^4.1.4",
+    "dropzone": "^6.0.0-beta.2",
+    "json-server": "^1.0.0-beta.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.3",
+    "react-router-dom": "^7.5.3",
+    "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/plugin-transform-runtime": "^7.21.4",
-    "@babel/runtime-corejs2": "^7.21.0",
-    "@parcel/transformer-sass": "^2.8.3",
-    "buffer": "^5.7.1",
-    "events": "^3.3.0",
-    "os-browserify": "^0.3.0",
-    "path-browserify": "^1.0.1",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
-    "util": "^0.12.5"
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "sass": "^1.87.0",
+    "vite": "^6.3.0"
   }
 }

@@ -1,0 +1,14 @@
+.view-panel--clr {
+    cursor: pointer;
+    height: 64px;
+    width: 64px;
+    box-shadow: 0 2px 10px 0 rgba(27, 31, 35, 0.08), 0 1px 2px 0 rgba(27, 31, 35, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 14px;
+  }
+  .view-panel--clr:hover {
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1), 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
+  }

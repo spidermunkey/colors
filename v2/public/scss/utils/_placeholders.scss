@@ -1,0 +1,119 @@
+%flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+%ashyWhite {
+    background: #fefefe9d;
+    backdrop-filter: blur(10px);
+}
+
+%hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+%visible {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible
+}
+
+
+*,*:after,*:before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.container {
+    max-width: 1024px;
+    margin: auto;
+}
+
+.nav-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.justiy-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.border-shadow {
+    border: 1px solid var(--border-btn);
+    box-shadow: 1px 3px 10px #e9ecef;
+}
+
+.text-dark{
+    color: var(--dark);
+}
+
+.inline {
+    display: inline-block;
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.text-gradient {
+    background: linear-gradient(to right, var(--text-gradient-1),var(--text-gradient-2));
+    -webkit-background-clip:text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+%text-gradient {
+    background: linear-gradient(to right, var(--text-gradient-1),var(--text-gradient-2));
+    -webkit-background-clip:text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientText( $clr1, $clr2, $dir:'ltr') {
+
+    -webkit-background-clip:text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @if($dir == 'ltr') {
+        background: linear-gradient(to right, var(--text-gradient-1),var(--text-gradient-2));
+    }
+    @else if ($dir == 'rtl') {
+        background: linear-gradient(to left, var(--text-gradient-1),var(--text-gradient-2));
+    }
+    @else if ($dir == 'ttb' ) {
+        background: linear-gradient(to bottom, var(--text-gradient-1),var(--text-gradient-2));
+    }
+    @else if ($dir == 'btt') {
+        background: linear-gradient(to top, var(--text-gradient-1),var(--text-gradient-2));
+    }
+    
+}
