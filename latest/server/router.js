@@ -1,21 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const client = require('./connect.js');
+const {local_client} = require('./utils/connect.js');
 
-const connect = async name => {
-    const connection = await client.connect();
-    const standardCollection = connection.db('colors');
-    const user_collection = connection.db('user_colors');
-    return {
-        connection,
-        standardCollection,
-        user_collection,
-    };
-}
+router.get('/meta/collections', async (request,response) => {
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_data = await meta.find({collection_type:'local'}).toArray();
+    response.json(meta_data)
+})
+router.get('/meta/projects', async (request,response) => {
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_data = await meta.find({collection_type:'project'}).toArray();
+    response.json(meta_data)
+})
 
-router.get('/', async (req,res) => {
+router.get('/collections/:collection', async (request,response) => {
 
 });
+
+router.get('/projects/:project', async (request,response) => {
+
+});
+
+router.get('/', async (request,response) => {
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_data = await meta.find().toArray()
+    console.log(meta_data)
+    response.json(meta_data)
+})
 
 module.exports = router;
 

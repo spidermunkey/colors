@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const morgan = require('morgan');
 const express = require('express');
@@ -7,6 +7,7 @@ const cors = require('cors');
 const PORT = 3330;
 
 const bodyParser = require('body-parser');
+const router = require('./router');
 
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -14,13 +15,10 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 
+app.use('/', router );
 
-app.get('/', (req,res) => {
-    res.json('Hello From The API HOME')
-    console.log('live request')
-});
 app.use((req,res) => {
-    res.status(404).json("404 not found")
+    res.status(404).json("404 not found");
 });
 
 async function run() {
@@ -40,6 +38,6 @@ async function run() {
     }
 };
 
-run().catch(e => {
-    console.log('i caught that')
+run().catch( e => {
+    console.log('i caught that');
 });
