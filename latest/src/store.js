@@ -5,8 +5,10 @@ async function get(endpoint) {
 }
 export const store = {
 
-  async collection(collectionName){
-
+  async collection(cid){
+    const endpoint = `api/collections/${cid}`;
+    const data = await get(endpoint);
+    return data;
   },
 
   async project(projectName){

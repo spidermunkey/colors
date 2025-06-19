@@ -1,20 +1,28 @@
-import { store } from './store';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { CollectionSummary } from './CollectionSummary';
-
+import { Collection } from './Collection';
+import { useTabState } from './TabContext'
 export const Dashboard = () => {
-  const [collections,setCollections] = useState([])
+  const { collections, collection, setTab } = useTabState();
   useEffect(() => {
-    const getData = async () => {
-      const resy = await store.meta();
-      console.log(resy)
-      setCollections(resy)
-    }
-    getData();
-  },[])
+    console.log('rendering',collection)
+  },[collection])
   return (
-    <div className="db_res">
-      {collections.map(collection => <CollectionSummary collection={collection}/> )}
+    <div className="db_res" onClick={(e) => {
+      const {target} = e;
+      const tab = target.closest('.panel-name');
+      if (tab) {
+        const cid = tab.getAttribute('cid');
+        if (cid) {
+          setTab(cid)
+          console.log('tabbed',cid)
+        }
+      }
+    }}>
+      { collection == null 
+        ? collections.map((collection,index) => <CollectionSummary collection={collection} key={index} />)
+        : <Collection collection={collection}/>
+      }
     </div>
   )
 }

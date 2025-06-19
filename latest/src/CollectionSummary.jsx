@@ -1,5 +1,4 @@
 export const CollectionSummary = ({collection}) => {
-  console.log(collection,collection.sample)
   return (
     <div className="collection-summary" cid={collection.id} collection={collection.name}>
       <div className="panel-header">

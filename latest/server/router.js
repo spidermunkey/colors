@@ -18,11 +18,18 @@ router.get('/meta/projects', async (request,response) => {
 })
 
 router.get('/collections/:collection', async (request,response) => {
-
-});
-
-router.get('/projects/:project', async (request,response) => {
-
+    const cid = request.params.collection
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const collectionData = await meta.findOne({id:cid});
+    console.log(cid,collectionData)
+    const collection = db.collection(collectionData.name);
+    const colors = await collection.find().toArray();
+    response.json({
+        ...collectionData,
+        colors,
+    })
 });
 
 router.get('/', async (request,response) => {
