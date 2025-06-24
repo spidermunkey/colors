@@ -78,14 +78,12 @@ export class Color {
     }
 
     set hue(num) {
-        console.log('setting hue',this.hsv,this.hsl,this.rgb)
+        console.log('setter hue')
         this.hsl[0] = num;
         this.hsv = hslToHsv(...this.hsl);
         this.rgb = hslToRgb(...this.hsl);
         this.hex = rgbToHex(...this.rgb);
 
-        console.log('set hue',this.hsv,this.hsl,this.rgb)
-        
     }
 
 
@@ -94,6 +92,7 @@ export class Color {
     }
 
     set saturation(num) {
+        console.log('setter sat')
         this.hsl[1] = num;
         this.hsv = hslToHsv(...this.hsv);
         this.rgb = hslToRgb(...this.hsl);
@@ -151,6 +150,7 @@ export class Color {
     }
 
     get darks() {
+      console.log('yoooo',getDarks(this.hex))
         return getDarks(this.hex);
     }
 
@@ -773,14 +773,11 @@ export function rgbToHex(r,g,b) {
 export function hslToRgb (hue, sat, light) {
     //https://en.wikipedia.org/wiki/HSL_and_HSV#HSL_to_RGB
     hue = hue % 360;
-
     if (hue < 0) 
         hue += 360;
-
     sat /= 100;
     light /= 100;
 
-    console.log(hue,sat,light)
     function f(n) {
         let k = (n + hue/30) % 12;
         let a = sat * Math.min(light, 1 - light);
