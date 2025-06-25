@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Color, getDarks, getLights, getShades, getTints } from "./color";
 import { Slider } from "./mouseTracker";
+export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512" pid="mbi2zcbr-011N0IZ0XY24"><title fill="#000" pid="mbi2zcbr-02EJJUV95T1C">ionicons-v5-e</title><rect x="128" y="128" width="336" height="336" rx="57" ry="57" 
+  style={{fill:"none",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-00TV2JYXWDF4"></rect><path d="M383.5,128l.5-24a56.16,56.16,0,0,0-56-56H112a64.19,64.19,0,0,0-64,64V328a56.16,56.16,0,0,0,56,56h24" 
+  style={{fill:"none",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-01OTOQ6EF054"></path></svg>) 
 
 function colorElement(hex,index) {
   return <div className="color-wrapper" key={index} style={{background:hex}}></div>
@@ -78,17 +81,14 @@ const HSL_Editor = ({ color, setColor }) => {
       return cpy;
     });
   }
-
   const setVar = (variableName,value) => {
     document.documentElement.style.setProperty(variableName,value);
   }
-
   const updateStyles = () => {
     setVar('--hue', hue + 'deg');
     setVar('--sat', saturation + '%')
     setVar('--light', lightness + '%')
   }
-
   const hydrateSliders = (color) => {
     hueSlider.current = new Slider({
       targetElement: huebarRef.current,
@@ -133,6 +133,12 @@ const HSL_Editor = ({ color, setColor }) => {
     lightSlider.current.setPercent(color.lightness)
   }
 
+  const copyRef = useRef();
+  const copy = () => {
+    copyRef.current.classList.add('animate')
+    window.navigator.clipboard.writeText(current.hex)
+    setTimeout(() => copyRef.current.classList.remove('animate'), 350)
+  }
   useEffect(() => {
     updateStyles();
     hydrateSliders(color);
@@ -143,6 +149,9 @@ const HSL_Editor = ({ color, setColor }) => {
   return (
     <div className="editor">
       <div class="box current-color">
+        <div className="icon copy" ref={copyRef} onClick={copy}>
+          <CopyOutline/>
+        </div>
         <div class="hue-wheel">
             <div class="inner-clip rainbow-clip">
                 <div class="knob"></div>
