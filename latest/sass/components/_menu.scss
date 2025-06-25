@@ -316,6 +316,7 @@
     background: linear-gradient(180deg,rgba(255, 255, 255, 0.703),transparent);
     pointer-events: none;
     opacity: 0;
+    visibility: hidden;
     transition: opacity 400ms ease;
     &.active {
       @include show();

@@ -1,4 +1,7 @@
+import { ago } from "./utils/ago"
+
 export const CollectionSummary = ({collection}) => {
+  console.log(collection)
   return (
     <div className="collection-summary" cid={collection.id} collection={collection.name}>
       <div className="panel-header">
@@ -18,25 +21,12 @@ export const CollectionSummary = ({collection}) => {
     </div>
       </div>
       <div className="panel-preview">
-        {collection.sample.map((color,index) => {
-        const { _id, hex, name, tone, hue, primaryTone, isFavorite } = color
-        return (
-          <div 
-          className="color-wrapper summary-wrapper" 
-          style={{backgroundColor:hex}}
-          hex={hex}
-          name={name}
-          tone={tone}
-          hue={hue}
-          primarytone={primaryTone}
-          id={_id}
-          favorite={isFavorite && isFavorite.toString()}
-          key={index}
-          ></div>
-        )
-      })}
+        {collection.sample.map(color => ( <div className="color-wrapper summary-wrapper" style={{backgroundColor:color.hex}}></div>))}
       </div>
-
+      <div className="panel-info">
+        <div className="size"> size: {collection.size} </div>
+        <div className="created"> created: { ago(new Date(collection.created_at)).string }</div>
+      </div>
     </div>
   )
 }

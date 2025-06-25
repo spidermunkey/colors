@@ -57,7 +57,7 @@ function CollectionMenu({collection, setTab, handleClose }) {
 }
 export const Menu = () => {
   const { collections, collection, menuActive, setMenuActive, tab, setTab } = useTabState();
-  const [modal,setModal] = useState(null);
+  const [modal,setModal] = useState('collections');
   const toggle = (modalName) => {
     if (modal === modalName) {
       setModal(null);
