@@ -139,6 +139,7 @@ const HSL_Editor = ({ color, setColor }) => {
     updateStyles();
     hydrateSliders(color);
     updateSliders();
+    setCurrent(color)
   },[color])
 
   return (
@@ -189,6 +190,10 @@ export const Preview = ({ color, state, setState }) => {
   const [current,setCurrent] = useState(color);
   const initial = useRef(color);
   const close = () => setState(null)
+  useEffect(() => {
+    initial.current = color;
+    setCurrent(color)
+  },[color])
   return (
     
     <div className={['color-preview', state == 'active' ? 'active' : false].filter(Boolean).join(' ')} >
