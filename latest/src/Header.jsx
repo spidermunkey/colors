@@ -1,11 +1,12 @@
+import { useTabState } from './TabContext'
+
 export const DashboardHeader = () => {
+    const { collection } = useTabState();
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">
         <div className="info-bar">
-            <div className="info-text">Browse</div>
-            <div className="current-tab">Home</div>
-            <div className="breadcrumb">Settings</div>
+            <div className="current-tab">{ collection?.name ? collection.name : 'home' }</div>
         </div>
         <div className="tool-bar">
             <div className="nav-bar">
