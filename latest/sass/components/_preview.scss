@@ -10,13 +10,12 @@ $bdr-light: #cecece64;
 .mini-preview {
   position: fixed;
   border: 1px solid $bdr-light;
-  right: 52px;
+  right: 102px;
   top: 24px;
   min-width: 300px;
   height: 100px;
   background-color: white;
   border-radius: 16px;
-  overflow: hidden;
   display: flex;
   visibility: hidden;
   opacity: 0;
@@ -29,6 +28,8 @@ $bdr-light: #cecece64;
   .selected-color {
     cursor: pointer;
     width: 40%;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
   }
   .selected-info {
     display: flex;
@@ -43,6 +44,34 @@ $bdr-light: #cecece64;
       text-transform: capitalize;
       margin-bottom: 4px;
       cursor: pointer;
+    }
+  }
+  .controls {
+    position: absolute;
+    right: -64px;
+    // top: -12px;
+    height: 100%;
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    .icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 48px;
+      scale: .8;
+      flex: 1;
+      border-radius: 8px;
+      border: 1px solid $bdr-light;
+      background: white;
+      transition: 200ms ease-in-out;
+      &:hover {
+        background: $bdr-light;
+      }
+      &.copy.animate {
+        background: #00c93d;
+      }
     }
   }
 }
