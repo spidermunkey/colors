@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Color,getDarks,getLights,getShades, getTints } from "./color";
+import { Color, getDarks, getLights, getShades, getTints } from "./color";
 import { Slider } from "./mouseTracker";
-
-
 
 function colorElement(hex,index) {
   return <div className="color-wrapper" key={index} style={{background:hex}}></div>
@@ -52,7 +50,7 @@ const HSL_Editor = ({ color, setColor }) => {
   const lightSlider = useRef();
   
   const setHue = deg => {
-    setVar('--hue', deg);
+    setVar('--hue', deg + 'deg');
     setCurrent((prev) => {
       const cpy = new Color(prev);
       cpy.hue = deg;
@@ -86,7 +84,7 @@ const HSL_Editor = ({ color, setColor }) => {
   }
 
   const updateStyles = () => {
-    setVar('--hue', hue);
+    setVar('--hue', hue + 'deg');
     setVar('--sat', saturation + '%')
     setVar('--light', lightness + '%')
   }
@@ -120,7 +118,7 @@ const HSL_Editor = ({ color, setColor }) => {
     hueSlider.current.setDegrees(deg)
   }
   const setSS = (pct) => {
-    hueInputRef.value = pct;
+    satInputRef.value = pct;
     setSaturation(pct)
     satSlider.current.setPercent(pct)
   }
