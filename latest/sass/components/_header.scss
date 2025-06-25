@@ -134,7 +134,7 @@ $border-light: rgba(128, 128, 128, 0.1771);
       width: 100%;
       align-items: center;
       margin-bottom: 12px;
-      .logo,.home {
+      .menu-icon,.home {
         height: 32px;
         width: 32px;
         border-radius: 12px;
@@ -149,7 +149,7 @@ $border-light: rgba(128, 128, 128, 0.1771);
         }
       }
 
-      .logo {
+      .menu-icon {
         margin-right: 4px;
         path:first-of-type {
           transition: 200ms ease;

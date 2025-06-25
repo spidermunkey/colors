@@ -3595,7 +3595,7 @@ a {
   position: relative;
 }
 
-.menu .logo {
+.menu .menu {
   height: 60px;
   flex-shrink: 0;
   margin: 8px 0;

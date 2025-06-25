@@ -27,14 +27,15 @@ export const MiniPreview = ({selected,state,setState}) => {
   }
   return (
       <div className={["mini-preview",state == 'active' ? false : 'active'].filter(Boolean).join(' ')}>
+        
         <div className="selected-color" 
         style={{ background: selected.hex }}
         onClick={() => setActive()}></div>
+        
         <div className="selected-info">
           <div className="name ">{selected.name}</div>
           <div className="hex">{selected.hex}</div>
-        </div>
-        <div className="controls">
+                  <div className="controls">
           <div className="copy icon" onClick={() => copy()} ref={copyRef}>
             <CopyOutline/>
           </div>
@@ -45,6 +46,8 @@ export const MiniPreview = ({selected,state,setState}) => {
             <FolderPlus/>
           </div>
         </div>
+        </div>
+
       </div>
   )
 }

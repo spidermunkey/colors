@@ -1,7 +1,9 @@
+@use 'mixins.scss' as *;
 @forward './components/components.scss';
 @forward './components/preview.scss';
 @forward './components/collection.scss';
 @forward './components/collectionSummary.scss';
+@forward './components/menu.scss';
 
 // api response container
 .db-res {

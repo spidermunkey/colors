@@ -8,19 +8,20 @@ export const TabProvider = ({children}) => {
   const [collection,setCollection] = useState(null);
   const [tab,setTab] = useState(null)
   const [collections,setCollections] = useState([]);
+  const [menuActive,setMenuActive] = useState(false);
 
   useEffect(() => {
       const getData = async () => {
-        const resy = await store.meta();
+        const resy = await store.meta.getData();
         setCollections(resy)
       }
       getData();
     },[])
+
   useEffect(() => {
     const cid = tab;
     const found = collections.find(c => c.id === cid);
     const getCollection = async (cid) => {
-      console.log('herio')
       const collection = await store.collection(cid);
       console.log('got it!',collection)
       setCollection(collection)
@@ -37,6 +38,8 @@ export const TabProvider = ({children}) => {
         collections,
         tab,
         setTab,
+        menuActive,
+        setMenuActive
       }
     }>{children}</TabContext.Provider>
   )
