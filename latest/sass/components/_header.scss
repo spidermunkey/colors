@@ -3,9 +3,8 @@
 $font-clr-light: rgba(20, 20, 21, .9);
 $border-light: rgba(128, 128, 128, 0.1771);
 
-.dashboard__header {
-  display: inline-flex;
-  flex-direction: column;
+.dashboard-header {
+  display: flex;
   position: relative;
   height: 112px;
   width: 100%;
@@ -90,6 +89,10 @@ $border-light: rgba(128, 128, 128, 0.1771);
     }
   }
 
+  .navigation-header {
+    display: inline-flex;
+    flex-direction: column;
+  }
   .info-bar,
   .nav-bar {
       display: flex;

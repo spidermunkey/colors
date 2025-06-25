@@ -184,16 +184,17 @@ const HSL_Editor = ({ color, setColor }) => {
   )
 }
 
-export const ColorPreview = ({color}) => {
+export const Preview = ({ color, state, setState }) => {
   const [tabIndex,setTabIndex] = useState(0);
   const [current,setCurrent] = useState(color);
   const initial = useRef(color);
-
+  const close = () => setState(null)
   return (
-    <div className="color-preview">
+    
+    <div className={['color-preview', state == 'active' ? 'active' : false].filter(Boolean).join(' ')} >
       <div className="modal-header">
         <div className="modal-label">Preview</div>
-        <div className="btn-close"> close </div>
+        <div className="btn-close" onClick={close}> close </div>
       </div>
       {/* <div className="current-color">
         <div className="current-color-preview" style={{background: color.hex}}></div>
