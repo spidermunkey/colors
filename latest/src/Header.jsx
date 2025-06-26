@@ -12,13 +12,13 @@ function useDebouncer(invoke, delay = 1400) {
 
 export const DashboardHeader = () => {
     const { collection, menuActive, setMenuActive } = useTabState();
-    const { inputRef, handleInput, setActive } = useSearch();
+    const { inputRef,active, handleInput, setActive } = useSearch();
 
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">
         <div className="info-bar">
-            <div className="current-tab">{ collection?.name ? collection.name : 'home' }</div>
+            <div className="current-tab">{ active ? 'search' : collection?.name ? collection.name : 'home' }</div>
         </div>
         <div className="tool-bar">
             <div className="nav-bar">

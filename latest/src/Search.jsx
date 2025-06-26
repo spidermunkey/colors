@@ -2,6 +2,7 @@ import { useEffect,useRef, useState } from "react"
 import { sortByHue, sortByLightness, toneUnknown } from "./color"
 import { cc } from "./utils/conditionalClassList"
 import { MiniPreview } from "./MiniPreview";
+import { Preview } from "./Preview";
 
 function transform(colors = []) { 
   return colors                    
@@ -40,6 +41,7 @@ export const Search = ({query, result , active, setActive }) => {
   return (
     <>
       <MiniPreview selected={selected} state={previewState} setState={setPreviewState} />
+      <Preview color={selected} state={previewState} setState={setPreviewState}/>
       <div className={cc(['search-modal', active && 'active'])} onClick={handleClick}>
       <div className="modal-header">
         <div className="modal-label">Search Colors</div>
