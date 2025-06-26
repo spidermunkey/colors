@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef,useState } from "react"
 
 export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512" pid="mbi2zcbr-011N0IZ0XY24"><title fill="#000" pid="mbi2zcbr-02EJJUV95T1C">ionicons-v5-e</title><rect x="128" y="128" width="336" height="336" rx="57" ry="57" 
   style={{fill:"none",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-00TV2JYXWDF4"></rect><path d="M383.5,128l.5-24a56.16,56.16,0,0,0-56-56H112a64.19,64.19,0,0,0-64,64V328a56.16,56.16,0,0,0,56,56h24" 
@@ -14,6 +14,7 @@ export const FolderPlus = () => (<svg width="24px" height="24px" viewBox="0 0 24
 </svg>) 
 
 export const MiniPreview = ({selected,state,setState}) => {
+  const [a2cActive,seta2cActive ] = useState(false)
   const setActive = () => {
     console.log('yo')
     setState('active')
@@ -27,7 +28,6 @@ export const MiniPreview = ({selected,state,setState}) => {
   }
   return (
       <div className={["mini-preview",state == 'active' ? false : 'active'].filter(Boolean).join(' ')}>
-        
         <div className="selected-color" 
         style={{ background: selected?.hex }}
         onClick={() => setActive()}></div>
@@ -46,6 +46,13 @@ export const MiniPreview = ({selected,state,setState}) => {
             <FolderPlus/>
           </div>
         </div>
+        </div>
+
+        <div className="a2c-menu">
+          <div className="btn-create">Create Collection +</div>
+          <div className="collection-list">
+            collections
+          </div>
         </div>
 
       </div>

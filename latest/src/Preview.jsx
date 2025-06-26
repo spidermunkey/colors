@@ -195,11 +195,13 @@ const HSL_Editor = ({ color, setColor }) => {
 export const Preview = ({ color, state, setState }) => {
   const [tabIndex,setTabIndex] = useState(0);
   const [current,setCurrent] = useState(color);
-  const initial = useRef(color);
+  const initial = useRef(color || new Color({hex:'#fff'}));
   const close = () => setState(null)
   useEffect(() => {
-    initial.current = color;
-    setCurrent(color)
+    let value = color
+    if (!color) value =  new Color({hex:'#fff'});
+    initial.current = value
+    setCurrent(value)
   },[color])
   return (
     

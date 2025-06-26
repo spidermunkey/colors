@@ -1,5 +1,5 @@
 import { useEffect,useRef, useState } from "react"
-import { sortByHue, sortByLightness, toneUnknown } from "./color"
+import { Color, sortByHue, sortByLightness, toneUnknown } from "./color"
 import { cc } from "./utils/conditionalClassList"
 import { MiniPreview } from "./MiniPreview";
 import { Preview } from "./Preview";
@@ -22,7 +22,7 @@ function ColorElement(color,index) {
 export const Search = ({query, result , active, setActive }) => {
     const colors = useRef(transform(result))
     const [previewState,setPreviewState] = useState(null);
-    const [selected,updateSelected] = useState(result[0]);
+    const [selected,updateSelected] = useState(result[0] || new Color({hex: '#fff'}));
     const handleClick = ({target}) => {
       const color = target.closest('.db-color')
       if (color) {
