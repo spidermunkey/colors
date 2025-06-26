@@ -1,28 +1,32 @@
-import { useEffect } from 'react';
-import { CollectionSummary } from './CollectionSummary';
 import { Collection } from './Collection';
-import { useTabState } from './TabContext'
+import { Home } from './Home';
+import { Search } from './Search';
+import { useTabState } from './TabContext';
+import { useSearch } from './useSearch';
 export const Dashboard = () => {
   const { collections, collection, setTab } = useTabState();
-  useEffect(() => {
-    console.log('rendering',collection)
-  },[collection])
+  const { query, result, active, setActive } = useSearch();
+  const navigate = ({target}) => {
+    const tab = target.closest('.panel-name');
+    if (tab) {
+      const cid = tab.getAttribute('cid');
+      if (cid) {
+        setTab(cid)
+      }
+    }
+  }
+  const render = () => {
+    if (active) {
+      return <Search active={active} setActive={setActive} query={query} result={result}/>
+    } else if (collection) {
+      return <Collection collection={collection}/>
+    } else {
+      return <Home collections={collections}/>
+    }
+  }
   return (
-    <div className="db_res" onClick={(e) => {
-      const {target} = e;
-      const tab = target.closest('.panel-name');
-      if (tab) {
-        const cid = tab.getAttribute('cid');
-        if (cid) {
-          setTab(cid)
-          console.log('tabbed',cid)
-        }
-      }
-    }}>
-      { collection == null 
-        ? collections.map((collection,index) => <CollectionSummary collection={collection} key={index} />)
-        : <Collection collection={collection}/>
-      }
+    <div className="db_res" onClick={navigate}>
+      { render() }
     </div>
   )
 }

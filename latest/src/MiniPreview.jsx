@@ -29,12 +29,12 @@ export const MiniPreview = ({selected,state,setState}) => {
       <div className={["mini-preview",state == 'active' ? false : 'active'].filter(Boolean).join(' ')}>
         
         <div className="selected-color" 
-        style={{ background: selected.hex }}
+        style={{ background: selected?.hex }}
         onClick={() => setActive()}></div>
         
         <div className="selected-info">
-          <div className="name ">{selected.name}</div>
-          <div className="hex">{selected.hex}</div>
+          <div className="name ">{selected?.name}</div>
+          <div className="hex">{selected?.hex}</div>
                   <div className="controls">
           <div className="copy icon" onClick={() => copy()} ref={copyRef}>
             <CopyOutline/>

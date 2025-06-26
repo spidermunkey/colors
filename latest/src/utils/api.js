@@ -10,37 +10,46 @@ export async function get(endpoint) {
 
 }
 
-export function add(endpoint, data){
-  const response = fetch(endpoint,{
+export async function add(endpoint, data){
+  const response = await fetch(endpoint,{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-  return response;
+  return response.json();
 }
 
-export function destroy(endpoint, id){
-  const response = fetch(`${endpoint}/${id}`,{
+export async function search(endpoint,params){
+  const response = await fetch(endpoint,{
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params)
+  })
+  return response.json();
+}
+
+export async function destroy(endpoint, id){
+  const response = await fetch(`${endpoint}/${id}`,{
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json'},
   })
-  return response;
+  return response.json();
 }
 
-export function update(endpoint, data){
-  const response = fetch(`${endpoint}/${data.id}`,{
+export async function update(endpoint, data){
+  const response = await fetch(`${endpoint}/${data.id}`,{
     method: 'PUT',
     headers: { 'Content-Type': 'application/json'},
     body: JSON.stringify(data),
   })
-  return response
+  return response.json()
 }
 
-export function edit(endpoint, data){
-  const response = fetch(`${endpoint}/${data.id}`,{
+export async function edit(endpoint, data){
+  const response = await fetch(`${endpoint}/${data.id}`,{
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json'},
     body: JSON.stringify(data),
   })
-  return response
+  return response.json()
 }

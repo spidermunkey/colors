@@ -1,5 +1,5 @@
 import { createObservable } from "./createObservable";
-import { add, destroy, get, update } from "./api";
+import { add, destroy, get, update, search } from "./api";
 
 export const createStore = (endpoint) => {
   const context = createObservable({
