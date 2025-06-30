@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const uuid = require('./utils/uuid.js')
 const {local_client} = require('./utils/connect.js');
 
 router.get('/meta/collections', async (request,response) => {
@@ -30,6 +31,44 @@ router.get('/collections/:collection', async (request,response) => {
         ...collectionData,
         colors,
     })
+})
+
+router.post('/collections/:collection', async (request,response) => {
+    const cid = request.params.collection;
+    const color = request.body.color;
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const collectionData = await meta.findOne({id:cid});
+    const collection = db.collection(collectionData.name);
+    const recentColletion = db.collection('{{recent}}');
+        await recentColletion.insertOne(color);
+    const added = await collection.insertOne(color);
+    let size = Number.isNaN(Number(collectionData.size)) ? 0 : (Number(collectionData.size))
+    collectionData.size = ++size;
+    let sample = collectionData.sample && collectionData.sample.length > 0 ? collectionData.sample : [];
+    if (sample.length < 25) sample.push(color);
+    const metaUpdated = await collectionData.findOneAndUpdate({id:cid},{size: size,sample:sample,updated_at: Date.now()},{returnDocument:'after',returnNewDocument:true});
+
+    response.json(metaUpdated)
+    })
+router.post('/collections/create', async (request,response) => {
+    const collection = request.body.collection;
+    const colors = collection?.colors || [];
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_document = {
+        name: collection.name,
+        collection_type: 'project',
+        created_at: Date.now(),
+        id: uuid(),
+        size: colors.length > 0 ? colors.length : 0,
+        sample: [...colors],
+        
+    }
+    await meta.insertOne(meta_document)
+    response.json(meta_document)
 })
 
 router.post('/search', async (request,response) => {
