@@ -94,8 +94,12 @@ $bdr-light: #cecece64;
     position: absolute;
     width: 100%;
     height: 500px;
+    top: 100%;
+    margin-top: 6px;
     background: white;
-    border: 1px solid red;
+    border-radius: 8px;
+    border: 1px solid $bdr-light;
+    padding: 10px;
   }
 }
 .color-preview {
@@ -298,7 +302,7 @@ $bdr-light: #cecece64;
                         inset 0px 0px 2px 0px rgba(211, 211, 211, 0.2893);
             margin: 12px auto;
             &.hue-bar {
-                background: linear-gradient(to left, hsla(0, 96%, 55%, 1),hsla(10, 96%, 55%, 1),hsla(20, 96%, 55%, 1),hsla(30, 96%, 55%, 1),hsla(40, 96%, 55%, 1),hsla(50, 96%, 55%, 1),hsla(60, 96%, 55%, 1),hsla(70, 96%, 55%, 1),hsla(80, 96%, 55%, 1),hsla(90, 96%, 55%, 1),hsla(100, 96%, 55%, 1),hsla(110, 96%, 55%, 1),hsla(120, 96%, 55%, 1),hsla(130, 96%, 55%, 1),hsla(140, 96%, 55%, 1),hsla(150, 96%, 55%, 1),hsla(160, 96%, 55%, 1),hsla(170, 96%, 55%, 1),hsla(180, 96%, 55%, 1),hsla(190, 96%, 55%, 1),hsla(200, 96%, 55%, 1),hsla(210, 96%, 55%, 1),hsla(220, 96%, 55%, 1),hsla(230, 96%, 55%, 1),hsla(240, 96%, 55%, 1),hsla(250, 96%, 55%, 1),hsla(260, 96%, 55%, 1),hsla(270, 96%, 55%, 1),hsla(280, 96%, 55%, 1),hsla(290, 96%, 55%, 1),hsla(300, 96%, 55%, 1),hsla(310, 96%, 55%, 1),hsla(320, 96%, 55%, 1),hsla(330, 96%, 55%, 1),hsla(340, 96%, 55%, 1),hsla(350, 96%, 55%, 1),hsla(360, 96%, 55%, 1));
+                background: linear-gradient(to right, hsla(0, 96%, 55%, 1),hsla(10, 96%, 55%, 1),hsla(20, 96%, 55%, 1),hsla(30, 96%, 55%, 1),hsla(40, 96%, 55%, 1),hsla(50, 96%, 55%, 1),hsla(60, 96%, 55%, 1),hsla(70, 96%, 55%, 1),hsla(80, 96%, 55%, 1),hsla(90, 96%, 55%, 1),hsla(100, 96%, 55%, 1),hsla(110, 96%, 55%, 1),hsla(120, 96%, 55%, 1),hsla(130, 96%, 55%, 1),hsla(140, 96%, 55%, 1),hsla(150, 96%, 55%, 1),hsla(160, 96%, 55%, 1),hsla(170, 96%, 55%, 1),hsla(180, 96%, 55%, 1),hsla(190, 96%, 55%, 1),hsla(200, 96%, 55%, 1),hsla(210, 96%, 55%, 1),hsla(220, 96%, 55%, 1),hsla(230, 96%, 55%, 1),hsla(240, 96%, 55%, 1),hsla(250, 96%, 55%, 1),hsla(260, 96%, 55%, 1),hsla(270, 96%, 55%, 1),hsla(280, 96%, 55%, 1),hsla(290, 96%, 55%, 1),hsla(300, 96%, 55%, 1),hsla(310, 96%, 55%, 1),hsla(320, 96%, 55%, 1),hsla(330, 96%, 55%, 1),hsla(340, 96%, 55%, 1),hsla(350, 96%, 55%, 1),hsla(360, 96%, 55%, 1));
             }
             &.sat-bar {
                 background: linear-gradient(to right, hsla(var(--hue), 0%, 50%, 1),hsla(var(--hue), 20%, 50%, 1),hsla(var(--hue), 40%, 50%, 1),hsla(var(--hue), 60%, 50%, 1),hsla(var(--hue), 80%, 50%, 1),hsla(var(--hue), 100%, 50%, 1));

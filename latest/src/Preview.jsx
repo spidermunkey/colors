@@ -73,7 +73,7 @@ const HSL_Editor = ({ color, setColor }) => {
 
   }
   const setLightness = pct => {
-    setVar('--sat', pct + '%')
+    setVar('--light', pct + '%')
     setCurrent((prev) => {
       const cpy = new Color(prev);
       cpy.lightness = pct;
