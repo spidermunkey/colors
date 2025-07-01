@@ -34,6 +34,7 @@ router.get('/collections/:collection', async (request,response) => {
 })
 
 router.post('/collections/:collection', async (request,response) => {
+
     const cid = request.params.collection;
     const color = request.body.color;
     const connection = await local_client.connect();
@@ -41,15 +42,27 @@ router.post('/collections/:collection', async (request,response) => {
     const meta = db.collection('{{meta}}');
     const collectionData = await meta.findOne({id:cid});
     const collection = db.collection(collectionData.name);
-    const recentColletion = db.collection('{{recent}}');
-    await recentColletion.insertOne(color);
-    const added = await collection.insertOne(color);
-    let size = Number.isNaN(Number(collectionData.size)) ? 0 : (Number(collectionData.size))
-    collectionData.size = ++size;
-    let sample = collectionData.sample && collectionData.sample.length > 0 ? collectionData.sample : [];
-    if (sample.length < 25) sample.push(color);
-    const metaUpdated = await collectionData.findOneAndUpdate({id:cid},{size: size,sample:sample,updated_at: Date.now()},{returnDocument:'after',returnNewDocument:true});
-    response.json(metaUpdated)
+    const found = await collection.findOne({_id:color._id});
+    if (found) {
+        const removed = await collection.findOneAndDelete({_id:color._id});
+        let size = Number.isNaN(Number(collectionData.size)) ? 0 : (Number(collectionData.size))
+        collectionData.size = --size;
+        let sample = collectionData.sample && collectionData.sample.length > 0 ? collectionData.sample.filter(samp => samp._id !== color._id) : [];
+        const metaUpdated = await meta.findOneAndUpdate({id:cid},{$set:{size: size,sample:sample,updated_at: Date.now()}},{returnDocument:'after',returnNewDocument:true});
+        response.json({operation:'removed'})
+    } else {
+        const recentColletion = db.collection('{{recent}}');
+        const found = await recentColletion.findOne({_id:color._id});
+        if (!found)
+            await recentColletion.insertOne(color);
+        const added = await collection.insertOne(color);
+        let size = Number.isNaN(Number(collectionData.size)) ? 0 : (Number(collectionData.size))
+        collectionData.size = ++size;
+        let sample = collectionData.sample && collectionData.sample.length > 0 ? collectionData.sample : [];
+        if (sample.length < 25) sample.push(color);
+        const metaUpdated = await meta.findOneAndUpdate({id:cid},{$set:{size: size,sample:sample,updated_at: Date.now()}},{returnDocument:'after',returnNewDocument:true});
+        response.json({operation:'added'})
+    }
 })
 
 router.post('/collections/create', async (request,response) => {

@@ -1,5 +1,6 @@
 import { useRef,useState } from "react"
 import { useTabState } from "./TabContext"
+import { store } from "./store"
 import { cc } from "./utils/conditionalClassList"
 
 export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512" pid="mbi2zcbr-011N0IZ0XY24"><title fill="#000" pid="mbi2zcbr-02EJJUV95T1C">ionicons-v5-e</title><rect x="128" y="128" width="336" height="336" rx="57" ry="57" 
@@ -59,20 +60,23 @@ export const MiniPreview = ({selected,state,setState}) => {
             <div className="btn-label">New Collection</div>
           </div>
           <div className="collection-list">
-            {collections.filter(({collection_type}) => collection_type === 'project').map(({name}) => {
+            {collections.filter(({collection_type}) => collection_type === 'project').map((collection) => {
               return (
-                <div className="collection-label" onClick={
+                <div className="collection-label" onClick= {
                   async({target}) => {
-                    const sibling = target.querySelector('.success');
-                      sibling.classList.add('animate')
-                      setTimeout(() => {sibling.classList.remove('animate')},2000)
+                    const {operation} = await store.update(collection.id,selected);
+                    const animation = target.querySelector('.success');
+                    const statusText = operation === 'added' ? 'color added' : operation === 'removed' ? 'color removed' : 'server error'
+                    animation.querySelector('.success-text').textContent = statusText;
+                    animation.classList.add('animate')
+                    setTimeout(() => {animation.classList.remove('animate')},2000)
                   }
                   }>
-                  {name}
+                  {collection.name}
                   <div className="success">
                     <div className="content">
                       <div className="success-marker" style={{background:selected.hex}}></div>
-                      <div className="success-text">color added</div>
+                      <div className="success-text"></div>
                     </div>
                   </div>
                 </div>

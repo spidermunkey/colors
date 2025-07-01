@@ -1,5 +1,5 @@
 import { createStore } from "./utils/createStore";
-import { get, search } from "./utils/api";
+import { get, search, post } from "./utils/api";
 export const store = {
 
   meta: {
@@ -24,6 +24,12 @@ export const store = {
   async search({query}){
     return search('/api/search',{
       query:query
+    })
+  },
+
+  async update(cid,color){
+    return post(`api/collections/${cid}`,{
+      color,
     })
   },
 
