@@ -5,7 +5,6 @@ $bdr-light: #cecece64;
 .mini-preview,
 .color-preview {
   position: absolute;
-
   .a2c-menu {
     opacity: 0;
     visibility: hidden;
@@ -102,6 +101,7 @@ $bdr-light: #cecece64;
     padding: 10px;
   }
 }
+
 .color-preview {
   position: fixed;
   right: 0;
@@ -154,7 +154,7 @@ $bdr-light: #cecece64;
       position: absolute;
       top: -24px;
       right: 0;
-            display: inline-flex;
+      display: inline-flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
@@ -181,8 +181,8 @@ $bdr-light: #cecece64;
     justify-content: center;
     margin: $padding;
     margin-top: 12px;
-          border: 1px solid #cecece64;
-      border-radius: 6px;
+    border: 1px solid #cecece64;
+    border-radius: 6px;
     .tab {
       padding: 10px;
       margin-right: 8px;
@@ -335,7 +335,7 @@ $bdr-light: #cecece64;
                 // box-shadow: 0 0 0 3px white,
                 //             1px 1px 5px 3px rgba(0, 0, 0, 0.223),
                 //             inset 0 0 0 3px white;
-                 box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.067),
+                box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.067),
                             -.125em 0 .25rem rgba(0, 0, 0, 0.148),
                             inset 1px 0px 0px -1px rgba(0, 0, 0, 0.0235),
                             inset 0px 0px 5px 0px rgba(232, 232, 232, 0.155),
@@ -362,7 +362,7 @@ $bdr-light: #cecece64;
             color: grey;
             border-radius: 2px;
         }
-    
+
         .val-label input {
             border: none;
             outline: none;
@@ -379,6 +379,32 @@ $bdr-light: #cecece64;
             box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.371);
         }
         
+    }
+  }
+
+  .success-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &.animate {
+      transform: translateY(-8px);
+      .success-label {
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    .success-label {
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: 200ms ease;
+      padding: 10px;
+      background-color: #70f09fcb;
+      border-radius: 10px;
     }
   }
 }

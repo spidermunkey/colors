@@ -6,7 +6,7 @@ export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width=
   style={{fill:"none",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-01OTOQ6EF054"></path></svg>) 
 
 function colorElement(hex,index) {
-  return <div className="color-wrapper" key={index} style={{background:hex}}></div>
+  return <div className="color-wrapper" key={index} hex={hex} style={{background:hex}}></div>
 }
 const Tints = ({color}) => {
   return (
@@ -134,10 +134,15 @@ const HSL_Editor = ({ color, setColor }) => {
   }
 
   const copyRef = useRef();
+
+
   const copy = () => {
     copyRef.current.classList.add('animate')
     window.navigator.clipboard.writeText(current.hex)
     setTimeout(() => copyRef.current.classList.remove('animate'), 350)
+  }
+  const copyVar = () => {
+
   }
   useEffect(() => {
     updateStyles();
@@ -196,6 +201,7 @@ export const Preview = ({ color, state, setState }) => {
   const [tabIndex,setTabIndex] = useState(0);
   const [current,setCurrent] = useState(color);
   const initial = useRef(color || new Color({hex:'#fff'}));
+  const successRef = useRef();
   const close = () => setState(null)
   useEffect(() => {
     let value = color
@@ -220,6 +226,19 @@ export const Preview = ({ color, state, setState }) => {
         <div className="tab" tab="shades" tabIndex="2" onClick={() => setTabIndex("2")}>Shades</div>
         <div className="tab" tab="tints" tabIndex="3" onClick={() => setTabIndex("3")}>Tints</div>
       </div>
+      <div className="variation-modal" onDoubleClick={({target}) => {
+        const variation = target.closest('.color-wrapper');
+        if (variation) {
+          const hex = variation.getAttribute('hex');
+          const text = `${hex} successfully copied`;
+          window.navigator.clipboard.writeText(hex);
+          successRef.current.querySelector('.success-label').textContent = text;
+          successRef.current.classList.add('animate');
+          console.log(successRef.current.classList)
+          setTimeout(() => {
+            successRef.current.classList.remove('animate')},2000)
+        }
+      }}>
       {
         tabIndex == "0" ? <Darks color={current} /> :
         tabIndex == "1" ? <Lights color={current} /> :
@@ -227,6 +246,10 @@ export const Preview = ({ color, state, setState }) => {
         tabIndex == "3" ? <Shades color={current} /> :
         <Err/>
       }
+      </div>
+
+      <div className="success-animation" ref={successRef}><div className="success-label"> successfully copied to clipboard </div></div>
+
     </div>
   )
 }
