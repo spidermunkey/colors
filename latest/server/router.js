@@ -42,16 +42,16 @@ router.post('/collections/:collection', async (request,response) => {
     const collectionData = await meta.findOne({id:cid});
     const collection = db.collection(collectionData.name);
     const recentColletion = db.collection('{{recent}}');
-        await recentColletion.insertOne(color);
+    await recentColletion.insertOne(color);
     const added = await collection.insertOne(color);
     let size = Number.isNaN(Number(collectionData.size)) ? 0 : (Number(collectionData.size))
     collectionData.size = ++size;
     let sample = collectionData.sample && collectionData.sample.length > 0 ? collectionData.sample : [];
     if (sample.length < 25) sample.push(color);
     const metaUpdated = await collectionData.findOneAndUpdate({id:cid},{size: size,sample:sample,updated_at: Date.now()},{returnDocument:'after',returnNewDocument:true});
-
     response.json(metaUpdated)
-    })
+})
+
 router.post('/collections/create', async (request,response) => {
     const collection = request.body.collection;
     const colors = collection?.colors || [];
@@ -69,6 +69,23 @@ router.post('/collections/create', async (request,response) => {
     }
     await meta.insertOne(meta_document)
     response.json(meta_document)
+})
+
+router.post('collections/search', async (request,response) => {
+    const query = request.body.query;
+    const cid = request.body.cid;
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const collectionData = await meta.findOne({id:cid});
+    const collection = db.collection(collectionData.name);
+    const validQuery = typeof query === 'string' && query.trim().length > 0;
+    let items = []
+    if (validQuery){
+        const escaped = query.replace(/[.*+?^=!:${}()|\[\]\/\\]/g,'\\$&');
+        items = await collection.find({name: {$regex: escaped, $options: 'i'} }).toArray()
+    }
+    response.json({searchQuery:query,data:items})
 })
 
 router.post('/search', async (request,response) => {
