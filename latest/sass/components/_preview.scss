@@ -99,7 +99,89 @@ $bdr-light: #cecece64;
     border-radius: 8px;
     border: 1px solid $bdr-light;
     padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+      .modal-title {
+        margin-left: 12px;
+        margin-bottom: 12px;
+        font-size: 20px;
+        color: #747474;
+        letter-spacing: 0.035em;
+      }
+      .btn-create {
+        display: flex;
+        margin-left: 8px;
+        .btn-label {
+          padding: 10px 24px;
+          border: 1px solid $bdr-light;
+          border-radius: 8px;
+          letter-spacing: 0.08em;
+          color: rgba(50, 50, 50, 0.973);
+          background-color: #eee;
+          cursor: pointer;
+          &:hover {
+            background: #dadada;
+          }
+        }
+      }
+    .collection-list {
+      display: flex;
+      flex-direction: column;
+      color: rgba(101, 101, 101, 0.9725490196);
+      text-transform: capitalize;
+      letter-spacing: 0.08em;
+      padding: 12px;
+
+      .collection-label {
+        margin: 4px 0px;
+        padding: 8px;
+        border: 1px solid $bdr-light;
+        width: 50%;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 150ms ease;
+        position: relative;
+        &:hover {
+          background: #efefef;
+        }
+        .success {
+          overflow: hidden;
+          position: absolute;
+          left: 100%;
+          top: 0;
+          margin-left: 10px;
+          display: flex;
+          align-items: center;
+          padding-top: 8px;
+            &.animate .content {
+              transform: translateY(0px);
+              opacity: 1;
+            }
+            .content {
+              transition: 200ms;
+              transform: translateY(4px);
+              opacity: 0;
+              display: flex;
+            }
+            .success-marker {
+              position: relative;
+              height: 20px;
+              width: 20px;
+              border-radius: 4px;
+              border: 1px solid $bdr-light;
+            }
+            .success-text {
+              display: flex;
+              align-items: center;
+              white-space: nowrap;
+              margin-left: 4px;
+              color: #777;
+              font-size: 14px;
+              letter-spacing: 0.09em;
+            }
+        }
+    }}
   }
+
 }
 
 .color-preview {

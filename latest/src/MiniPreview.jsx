@@ -1,4 +1,5 @@
 import { useRef,useState } from "react"
+import { useTabState } from "./TabContext"
 import { cc } from "./utils/conditionalClassList"
 
 export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512" pid="mbi2zcbr-011N0IZ0XY24"><title fill="#000" pid="mbi2zcbr-02EJJUV95T1C">ionicons-v5-e</title><rect x="128" y="128" width="336" height="336" rx="57" ry="57" 
@@ -15,6 +16,7 @@ export const FolderPlus = () => (<svg width="24px" height="24px" viewBox="0 0 24
 </svg>) 
 
 export const MiniPreview = ({selected,state,setState}) => {
+  const {collections} = useTabState();
   const [a2cActive,seta2cActive ] = useState(false)
   const setActive = () => {
     console.log('yo')
@@ -50,9 +52,32 @@ export const MiniPreview = ({selected,state,setState}) => {
         </div>
 
         <div className={cc(["a2c-menu",a2cActive && 'active'])}>
-          <div className="btn-create">Create Collection +</div>
+          <div className="modal-header">
+            <div className="modal-title">Add To Collection</div>
+          </div>
+          <div className="btn-create">
+            <div className="btn-label">New Collection</div>
+          </div>
           <div className="collection-list">
-            collections
+            {collections.filter(({collection_type}) => collection_type === 'project').map(({name}) => {
+              return (
+                <div className="collection-label" onClick={
+                  async({target}) => {
+                    const sibling = target.querySelector('.success');
+                      sibling.classList.add('animate')
+                      setTimeout(() => {sibling.classList.remove('animate')},2000)
+                  }
+                  }>
+                  {name}
+                  <div className="success">
+                    <div className="content">
+                      <div className="success-marker" style={{background:selected.hex}}></div>
+                      <div className="success-text">color added</div>
+                    </div>
+                  </div>
+                </div>
+                )
+              })}
           </div>
         </div>
 
