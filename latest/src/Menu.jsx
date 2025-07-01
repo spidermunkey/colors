@@ -34,7 +34,7 @@ function CollectionMenu({collection, setTab, handleClose }) {
         </div>
       </div>
     </div> 
-        <div class="label title">{name}</div>
+        <div class="label title" onClick={navigate}>{name}</div>
         <div class="sample-window" onClick={navigate}>
           {sample.slice(0,20).map((color) => {
             return (

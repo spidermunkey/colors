@@ -1,9 +1,9 @@
 import { sortByHue, sortByLightness, toneUnknown } from "./color"
 import { Preview } from "./Preview";
 import { MiniPreview } from "./MiniPreview";
-import {useState,useRef} from "react";
+import {useState,useRef, useEffect} from "react";
 
-function transform(colors) { 
+function transform(colors = []) { 
   return colors                    
         .slice()
         .filter(value => !toneUnknown(value))
@@ -18,25 +18,30 @@ function colorElement(color,index) {
 }
 
 export const Collection = ({collection}) => {
-  const colors = useRef(transform(collection.colors))
+  const [colors,setColors] = useState(transform(collection.colors))
   const [previewState,setPreviewState] = useState(null);
-  const [selected,updateSelected] = useState(colors.current[0]);
+  const [selected,updateSelected] = useState(colors[0]);
+  
   const handleClick = ({target}) => {
     const color = target.closest('.db-color')
     if (color) {
       const id = color.getAttribute('id');
-      const info = colors.current.find(c => c._id === id);
+      const info = colors.find(c => c._id === id);
       if (info) {
         updateSelected(info)
       }
     }
   }
 
+  useEffect(() => {
+    console.log('new colors',collection)
+    setColors(transform(collection.colors))
+  },[collection,setColors])
   return (
     <>
       <MiniPreview selected={selected} state={previewState} setState={setPreviewState} />
       <div className="collection" onClick={handleClick}>
-        {colors.current && transform(colors.current).map(colorElement)}
+        {colors && transform(colors).map(colorElement)}
       </div>
       <Preview color={selected} state={previewState} setState={setPreviewState} />
     </>
