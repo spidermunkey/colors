@@ -75,6 +75,7 @@ export const Menu = () => {
   return ( 
   <div className={["menu-cosm", menuActive ? 'active' : false ].filter(Boolean).join(' ')}>
     <div className={["menu", menuActive ? 'active' : false ].filter(Boolean).join(' ')}>
+    <div className="btn-close" onClick={handleClose}>close</div>
         <div className="nav-list">
             <div className="menu-item"><div className="menu-label" type="link" link="home" onClick={()=>{setTab('home');handleClose()}}>Home</div></div>
             <div className="menu-item" type="link" link="editor"><div className="menu-label" onClick={()=>{setTab('editor');handleClose()}}>Editor</div></div>
