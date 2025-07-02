@@ -1,11 +1,11 @@
 import { useTabState } from './TabContext'
 import { useEffect, useState } from 'react';
 import { ago } from './utils/ago';
-function CollectionMenu({collection, setTab, handleClose }) { 
+function CollectionMenu({collection, handleTab, handleClose }) { 
   const {id,name,collection_type = '',size, uploaded_at = undefined, sample = [], created_at = null, updated_on = null} = collection
   const getAgo = msDate => ago(new Date(msDate)).string;
   const navigate = () => {
-    setTab(id);
+    handleTab(id);
     handleClose();
   }
   return (
@@ -56,7 +56,7 @@ function CollectionMenu({collection, setTab, handleClose }) {
         
 }
 export const Menu = () => {
-  const { collections, collection, menuActive, setMenuActive, tab, setTab } = useTabState();
+  const { collections, collection, menuActive, setMenuActive, tab, handleTab } = useTabState();
   const [modal,setModal] = useState('collections');
   const toggle = (modalName) => {
     if (modal === modalName) {
@@ -69,16 +69,16 @@ export const Menu = () => {
     setMenuActive(false)
     setModal(null)
   }
-  const collectionList = () => collections.filter(c => c.collection_type === 'local').map((collection) => <CollectionMenu collection={collection} setTab={setTab} handleClose={handleClose}/>)
-  const projectList = () => collections.filter(c => c.collection_type === 'project').map((collection) => <CollectionMenu collection={collection} setTab={setTab} handleClose={handleClose}/>)
-  const indexList = () => collections.filter(c => c.collection_type === 'index').map((collection) => <CollectionMenu collection={collection} setTab={setTab} handleClose={handleClose}/>)
+  const collectionList = () => collections.filter(c => c.collection_type === 'local').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
+  const projectList = () => collections.filter(c => c.collection_type === 'project').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
+  const indexList = () => collections.filter(c => c.collection_type === 'index').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
   return ( 
   <div className={["menu-cosm", menuActive ? 'active' : false ].filter(Boolean).join(' ')}>
     <div className={["menu", menuActive ? 'active' : false ].filter(Boolean).join(' ')}>
     <div className="btn-close" onClick={handleClose}>close</div>
         <div className="nav-list">
-            <div className="menu-item"><div className="menu-label" type="link" link="home" onClick={()=>{setTab('home');handleClose()}}>Home</div></div>
-            <div className="menu-item" type="link" link="editor"><div className="menu-label" onClick={()=>{setTab('editor');handleClose()}}>Editor</div></div>
+            <div className="menu-item"><div className="menu-label" type="link" link="home" onClick={()=>{handleTab('home');handleClose()}}>Home</div></div>
+            <div className="menu-item" type="link" link="editor"><div className="menu-label" onClick={()=>{handleTab('editor');handleClose()}}>Editor</div></div>
             <div className="menu-item"><div className="menu-label" type="nav" role="tab" modal="colors" onClick={() => toggle('colors')}>Colors</div></div>
             <div className="menu-item"><div className="menu-label"  type="nav" role="tab" modal="collections" onClick={() => toggle('collections')}>Collections</div></div>
             <div className="menu-item"><div className="menu-label"  type="nav" role="tab" modal="projects" onClick={() => toggle('projects')}>Projects</div></div>

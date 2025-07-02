@@ -24,6 +24,7 @@ const Lights = ({color}) => {
   )
 }
 const Darks = ({color}) => {
+  console.log(color)
   return (
     <div className="preview-modal editor"> 
       {getDarks(color.hex).map(colorElement)} 

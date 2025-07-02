@@ -5,14 +5,14 @@ import { Search } from './Search';
 import { useTabState } from './TabContext';
 import { useSearch } from './useSearch';
 export const Dashboard = () => {
-  const { collections, collection, tab, setTab } = useTabState();
+  const { collections, collection, tab, handleTab } = useTabState();
   const { query, result, active, setActive } = useSearch();
   const navigate = ({target}) => {
     const tab = target.closest('.panel-name');
     if (tab) {
       const cid = tab.getAttribute('cid');
       if (cid) {
-        setTab(cid)
+        handleTab(cid)
       }
     }
   }

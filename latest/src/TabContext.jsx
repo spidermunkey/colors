@@ -18,23 +18,27 @@ export const TabProvider = ({children}) => {
       getData();
     },[])
 
-  useEffect(() => {
-    const cid = tab;
-    const found = collections.find(c => c.id === cid);
-    const getCollection = async (cid) => {
-      const collection = await store.collection(cid);
-      console.log('got it!',collection)
-      setCollection(collection)
-    }
-    if (found){
-      getCollection(found.id);
-    } else if (tab === 'home') {
-      setCollection({name:'home'})
-    } else if (tab === 'editor'){
-      setCollection({name:'editor'})
-    }
-  },[tab])
+   const handleTab = (tab) => {
+      const cid = tab;
+      const found = collections.find(c => c.id === cid);
+      console.log('here')
+      const getCollection = async (cid) => {
+        const collection = await store.collection(cid);
+        console.log('got it!',collection)
+        setCollection(collection);
+        setTab(tab);
+      }
+      if (found){
+        getCollection(found.id);
+      } else if (tab === 'home') {
+        setCollection({name:'home'})
+        setTab(tab)
+      } else if (tab === 'editor'){
+        setCollection({name:'editor'})
+        setTab(tab)
+      }
 
+   }
   return (
     <TabContext.Provider value={
       {
@@ -42,6 +46,7 @@ export const TabProvider = ({children}) => {
         collections,
         tab,
         setTab,
+        handleTab,
         menuActive,
         setMenuActive
       }
