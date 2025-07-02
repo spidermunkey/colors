@@ -13,7 +13,7 @@ function useDebouncer(invoke, delay = 1400) {
 export const DashboardHeader = () => {
     
     const { collection, menuActive, setMenuActive } = useTabState();
-    const { inputRef,active, handleInput, setActive } = useSearch();
+    const { inputRef,active, query, handleInput, setActive } = useSearch();
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">
@@ -42,17 +42,7 @@ export const DashboardHeader = () => {
                     </div>
                     <input className="active" type="text" placeholder="Search" ref={inputRef} onChange={handleInput} onFocus={() => setActive(true)}/>
                 </div>
-                <div className="filter filter-modal">
-                    <div className="btn-cancel">
-                        <span className="icon">
-                            <svg width="24px" height="24px" viewBox="4 5 16 15" fill="none" xmlns="http://www.w3.org/2000/svg" pid="m4lw6ve6-01IHH09U9UOO">
-                                <path d="M8.46447 15.5355L15.5355 8.46446" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" pid="m4lw6ve6-01JPIXJRA2BQ" fill="null"></path>
-                                <path d="M8.46447 8.46447L15.5355 15.5355" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" pid="m4lw6ve6-00079WQ8XYP0" fill="null"></path>
-                            </svg>
-                        </span>
-                        <span className="label">cancel search</span>
-                    </div>
-                </div>
+                {active && <div className='btn-close' onClick={() => setActive(false)}>close</div>}
             </div>
         </div>
       </div>

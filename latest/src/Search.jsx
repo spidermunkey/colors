@@ -43,12 +43,7 @@ export const Search = ({query, result , active, setActive }) => {
       <MiniPreview selected={selected} state={previewState} setState={setPreviewState} />
       <Preview color={selected} state={previewState} setState={setPreviewState}/>
       <div className={cc(['search-modal', active && 'active'])} onClick={handleClick}>
-      <div className="modal-header">
-        <div className="modal-label">Search Colors</div>
-        <div className="modal-close btn-close" onClick={() => setActive(false)}>close</div>
-      </div>
       <div className="modal-content">
-        {query != '' && <div className="query-header">Searching For <span className="query">{query}</span></div> }
         <div className="search-results">
           {colors.current && colors.current.map(ColorElement)}
         </div>
