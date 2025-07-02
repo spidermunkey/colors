@@ -14,7 +14,6 @@ export const DashboardHeader = () => {
     
     const { collection, menuActive, setMenuActive } = useTabState();
     const { inputRef,active, handleInput, setActive } = useSearch();
-    useEffect(() => {console.log('colly',collection)},[collection])
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">

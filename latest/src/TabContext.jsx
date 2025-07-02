@@ -26,7 +26,6 @@ export const TabProvider = ({children}) => {
       console.log('got it!',collection)
       setCollection(collection)
     }
-    console.log(found,collections,cid)
     if (found){
       getCollection(found.id);
     } else if (tab === 'home') {

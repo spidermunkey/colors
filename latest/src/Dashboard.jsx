@@ -16,7 +16,6 @@ export const Dashboard = () => {
       }
     }
   }
-  useEffect(() => {console.log('TAB',tab)},[tab])
   const render = () => {
     if (active) {
       return <Search active={active} setActive={setActive} query={query} result={result}/>

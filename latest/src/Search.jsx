@@ -22,7 +22,7 @@ function ColorElement(color,index) {
 export const Search = ({query, result , active, setActive }) => {
     const colors = useRef(transform(result))
     const [previewState,setPreviewState] = useState(null);
-    const [selected,updateSelected] = useState(result[0] || new Color({hex: '#fff'}));
+    const [selected,updateSelected] = useState(result[0] ? result[0] : new Color({hex: '#fff'}));
     const handleClick = ({target}) => {
       const color = target.closest('.db-color')
       if (color) {

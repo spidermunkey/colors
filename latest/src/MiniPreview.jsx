@@ -30,6 +30,9 @@ export const MiniPreview = ({selected,state,setState}) => {
     window.navigator.clipboard.writeText(selected.hex)
     setTimeout(() => copyRef.current.classList.remove('animate'), 350)
   }
+  useRef(() => {
+    console.log('selected',selected)
+  })
   return (
       <div className={["mini-preview",state == 'active' ? false : 'active'].filter(Boolean).join(' ')}>
         <div className="selected-color" 
@@ -75,7 +78,7 @@ export const MiniPreview = ({selected,state,setState}) => {
                   {collection.name}
                   <div className="success">
                     <div className="content">
-                      <div className="success-marker" style={{background:selected.hex}}></div>
+                      <div className="success-marker" style={{background:selected?.hex || '#fff' }}></div>
                       <div className="success-text"></div>
                     </div>
                   </div>

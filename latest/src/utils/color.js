@@ -22,16 +22,13 @@ export class Color {
         this.hex = props.hex || '';
         if (!this.hex)
             throw new Error('new colors require a hex value to be instatiated... contructor({hex:value})');
-        
         this.uid = props.id || props._id || null;
-        
         this.rgb = props.rgb?.slice() || hexToRgb(this.hex);
         this.hsl = props.hsl?.slice() || rgbToHsl(...this.rgb);
         this.hsv = props.hsv?.slice() || hslToHsv(...this.hsl);
         this.tone = props.tone || getTone( this.hsl[2] , this.hsl[1] )[0];
         this.alpha = null;
         this.primaryColor = props.primaryColor || '';
-        console.log(this)
     }
 
     get red() {
