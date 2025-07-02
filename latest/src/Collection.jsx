@@ -1,4 +1,4 @@
-import { sortByHue, sortByLightness, toneUnknown } from "./color"
+import { sortByHue, sortByLightness, toneUnknown } from "./utils/color"
 import { Preview } from "./Preview";
 import { MiniPreview } from "./MiniPreview";
 import {useState,useRef, useEffect} from "react";
@@ -37,6 +37,7 @@ export const Collection = ({collection}) => {
     console.log('new colors',collection)
     setColors(transform(collection.colors))
   },[collection,setColors])
+
   return (
     <>
       <MiniPreview selected={selected} state={previewState} setState={setPreviewState} />

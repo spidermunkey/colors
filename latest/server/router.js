@@ -3,6 +3,7 @@ const router = express.Router();
 const uuid = require('./utils/uuid.js')
 const {local_client} = require('./utils/connect.js');
 
+
 router.get('/meta/collections', async (request,response) => {
     const connection = await local_client.connect();
     const db = connection.db('colors');
@@ -19,13 +20,30 @@ router.get('/meta/projects', async (request,response) => {
     response.json(meta_data)
 })
 
+router.get('/meta/index', async (request,response) => {
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_data = await meta.find({collection_type:'index'}).toArray();
+    response.json('meta_data')
+})
+
+router.get('/meta', async (request,response) => {
+    const connection = await local_client.connect();
+    const db = connection.db('colors');
+    const meta = db.collection('{{meta}}');
+    const meta_data = await meta.find().toArray();
+    response.json(meta_data);
+})
+
 router.get('/collections/:collection', async (request,response) => {
     const cid = request.params.collection
     const connection = await local_client.connect();
     const db = connection.db('colors');
     const meta = db.collection('{{meta}}');
     const collectionData = await meta.findOne({id:cid});
-    const collection = db.collection(collectionData.name);
+    let name = collectionData.name === 'recent' ? '{{recent}}' : collectionData.name === 'all' ? '{{all}}' : collectionData.name
+    const collection = db.collection(name);
     const colors = await collection.find().toArray();
     response.json({
         ...collectionData,
@@ -34,7 +52,6 @@ router.get('/collections/:collection', async (request,response) => {
 })
 
 router.post('/collections/:collection', async (request,response) => {
-
     const cid = request.params.collection;
     const color = request.body.color;
     const connection = await local_client.connect();
@@ -52,7 +69,7 @@ router.post('/collections/:collection', async (request,response) => {
         response.json({operation:'removed'})
     } else {
         const recentColletion = db.collection('{{recent}}');
-        const found = await recentColletion.findOne({_id:color._id});
+        const found = await collection.findOne({_id:color._id, hex:{$not:hex}});
         if (!found)
             await recentColletion.insertOne(color);
         const added = await collection.insertOne(color);
@@ -92,6 +109,7 @@ router.post('collections/search', async (request,response) => {
     const meta = db.collection('{{meta}}');
     const collectionData = await meta.findOne({id:cid});
     const collection = db.collection(collectionData.name);
+    
     const validQuery = typeof query === 'string' && query.trim().length > 0;
     let items = []
     if (validQuery){

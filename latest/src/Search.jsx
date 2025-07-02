@@ -1,5 +1,5 @@
 import { useEffect,useRef, useState } from "react"
-import { Color, sortByHue, sortByLightness, toneUnknown } from "./color"
+import { Color, sortByHue, sortByLightness, toneUnknown } from "./utils/color"
 import { cc } from "./utils/conditionalClassList"
 import { MiniPreview } from "./MiniPreview";
 import { Preview } from "./Preview";

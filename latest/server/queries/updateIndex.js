@@ -5,25 +5,24 @@ async function run() {
   const db = connection.db('colors');
   const meta = db.collection('{{meta}}');
   const all = db.collection('{{all}}');
-
-  const collections = (await db.listCollections().toArray()).map(({name}) => name);
-  console.log(collections)  
-  for (const collection of collections) {
-    let c = db.collection(collection);
-    let items = await c.find().toArray();
-    items.forEach(item => all.insertOne({
-      ...item,
-      index_id: uuid(),
-    }))
-  }
+  const recent = db.collection('{{recent}}');
   const info = {
     collection_type: 'index',
     name: 'all',
-    cid: uuid(),
+    id: uuid(),
     size: await all.countDocuments(),
     created_at: Date.now(),
+    sample: await all.find().limit(25).toArray(),
+  }
+  const recentInfo = {
+    collection_type: 'index',
+    name: 'recent',
+    id: uuid(),
+    size: await recent.countDocuments(),
+    created_at: Date.now(),
+    sample: await recent.find().limit(25).toArray(),
   }
   meta.insertOne(info)
+  meta.insertOne(recentInfo)
 }
 
-run();

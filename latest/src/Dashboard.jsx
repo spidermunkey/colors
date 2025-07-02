@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { Collection } from './Collection';
 import { Home } from './Home';
 import { Search } from './Search';
 import { useTabState } from './TabContext';
 import { useSearch } from './useSearch';
 export const Dashboard = () => {
-  const { collections, collection, setTab } = useTabState();
+  const { collections, collection, tab, setTab } = useTabState();
   const { query, result, active, setActive } = useSearch();
   const navigate = ({target}) => {
     const tab = target.closest('.panel-name');
@@ -15,9 +16,14 @@ export const Dashboard = () => {
       }
     }
   }
+  useEffect(() => {console.log('TAB',tab)},[tab])
   const render = () => {
     if (active) {
       return <Search active={active} setActive={setActive} query={query} result={result}/>
+    } else if (tab === 'home'){
+      return <Home collections={collections}/>
+    } else if (tab === 'editor'){
+      return <div className="editor"></div>
     } else if (collection) {
       return <Collection collection={collection}/>
     } else {

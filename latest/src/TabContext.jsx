@@ -29,8 +29,13 @@ export const TabProvider = ({children}) => {
     console.log(found,collections,cid)
     if (found){
       getCollection(found.id);
+    } else if (tab === 'home') {
+      setCollection({name:'home'})
+    } else if (tab === 'editor'){
+      setCollection({name:'editor'})
     }
   },[tab])
+
   return (
     <TabContext.Provider value={
       {

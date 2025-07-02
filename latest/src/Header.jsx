@@ -1,6 +1,6 @@
 import { useTabState } from './TabContext'
 import { useSearch } from './useSearch';
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 function useDebouncer(invoke, delay = 1400) {
   let timeoutID = useRef(null);
@@ -11,9 +11,10 @@ function useDebouncer(invoke, delay = 1400) {
 }
 
 export const DashboardHeader = () => {
+    
     const { collection, menuActive, setMenuActive } = useTabState();
     const { inputRef,active, handleInput, setActive } = useSearch();
-
+    useEffect(() => {console.log('colly',collection)},[collection])
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">
