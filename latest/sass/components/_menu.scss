@@ -2,6 +2,7 @@
 
 .menu {
     display: flex;
+    flex-direction: column;
     z-index: 100;
     position: absolute;
     inset: 0;
@@ -10,32 +11,14 @@
         .menu-item {
             opacity: 1;
             transform: translate(0);
-            // color: $border-light;
             transition: transform 400ms ease, color 500ms ease-in-out, opacity 120ms ease;
-            &:hover,
-            &.active {
-            //    color: white;
-            //    color: $border-light;
-            }
-            .menu-label.active {
-                // color: $font-clr-light;   
-            }   
           }
         .menu-previews {
             position: absolute;
             width: 800px;
             height: 300px;
             border-top-left-radius: 0px;
-            // border-top-left-radius: 60px;
-            // background-clip: border-box;
-            // border-left: 2px solid transparent;
-            // border-top: 2px solid transparent;
-            // background-color: white;
-            // border-left-width: 2px;
             border-top:1px solid #89898911;
-            // border
-            top: 140px;
-            left: 500px;
             padding: 40px;
             color: $border-light;
             transition: border-radius 400ms ease, opacity 300ms ease;
@@ -60,22 +43,44 @@
             }
         }
     }
-    .btn-close {
-      position: absolute;
-      top: 112px;
-      left: 26px;
+    .menu-content {
+      display: flex;
+    }
+    .menu-header {
+      display: flex;
+      padding: 12px;
+      height: fit-content;
+      width: fit-content;
+      margin-left: 20px;
+      margin-top: 68px;
+      .menu-icon,.home {
+        height: 32px;
+        width: 32px;
+        border-radius: 12px;
+        @include flex-center();
+        cursor: pointer;
+        svg {
+          scale: .9;
+          height: 28px;
+          width: 28px;
+          fill: #5b5b5bad;
+        }
+      }
+      .btn-close {
       font-family: Arial, Helvetica, sans-serif;
       color: #333;
       border: 1px solid $bdr-light;
       padding: 6px 16px;
       border-radius: 10px;
       letter-spacing: 0.035em;
+      margin-left: 12px;
       cursor: pointer;
   }
+    }
+
 }
 // sidebar
 .nav-list {
-    margin-top: 130px;
     margin-left: 46px;
     padding: 40px;
     display: flex;
@@ -110,7 +115,6 @@
 .menu-modals {
     height: 400px;
     width: 400px;
-    margin-top: 120px;
     margin-left: 40px;
 }
   // separation / transform container scroll
