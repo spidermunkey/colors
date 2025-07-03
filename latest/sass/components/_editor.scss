@@ -1,0 +1,18 @@
+.editor-modal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  .editor {
+    display: flex;
+    flex-direction: column;
+    .modal-header,.modal-content{
+      border: 1px solid red;
+    }
+  }
+
+  .browser {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+  }
+}

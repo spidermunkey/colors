@@ -4,6 +4,7 @@ import { Home } from './Home';
 import { Search } from './Search';
 import { useTabState } from './TabContext';
 import { useSearch } from './useSearch';
+import { Editor } from './Editor';
 export const Dashboard = () => {
   const { collections, collection, tab, handleTab } = useTabState();
   const { query, result, active, setActive } = useSearch();
@@ -22,7 +23,7 @@ export const Dashboard = () => {
     } else if (tab === 'home'){
       return <Home collections={collections}/>
     } else if (tab === 'editor'){
-      return <div className="editor"></div>
+      return <Editor/>
     } else if (collection) {
       return <Collection collection={collection}/>
     } else {
