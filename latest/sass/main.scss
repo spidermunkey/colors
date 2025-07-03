@@ -8,21 +8,21 @@ html,body {
     position: relative;
 }
 
-body {
-}
-
 #root {
     position: relative;
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
 }
 .db_res {
     position: relative;
     flex: 1;
-    overflow: scroll;
+    overflow-y: scroll;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
 }
 .db_res.menu-active {
     opacity: .5;
