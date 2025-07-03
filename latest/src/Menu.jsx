@@ -69,6 +69,14 @@ export const Menu = () => {
     setMenuActive(false)
     setModal(null)
   }
+
+  useEffect(() => {
+    const ref = document.querySelector('.db_res');
+    if (ref){
+      menuActive ? ref.classList.add('menu-active') : ref.classList.remove('menu-active');
+    }
+
+  },[modal,menuActive])
   const collectionList = () => collections.filter(c => c.collection_type === 'local').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
   const projectList = () => collections.filter(c => c.collection_type === 'project').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
   const indexList = () => collections.filter(c => c.collection_type === 'index').map((collection) => <CollectionMenu collection={collection} handleTab={handleTab} handleClose={handleClose}/>)
