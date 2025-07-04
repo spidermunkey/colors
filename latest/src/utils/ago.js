@@ -68,7 +68,7 @@ export function ago(msDate) {
       let rounded = ago.months === 1 && days > 0 ? 2 : 1
       ago.string = `${rounded} ${rounded === 1 ? 'month' : 'months'} ${context}`
   }
-  else if (ago.weeksAgo <= 4 && ago.weeksAgo > 2) {
+  else if (ago.weeksAgo <= 4 && ago.weeksAgo >= 2) {
       ago.string = `${ago.weeksAgo} weeks ${context}`
   }
 
