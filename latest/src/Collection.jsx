@@ -2,7 +2,7 @@ import { sortByHue, sortByLightness, toneUnknown } from "./utils/color"
 import { Preview } from "./Preview";
 import { MiniPreview } from "./MiniPreview";
 import {useState,useRef, useEffect} from "react";
-
+import { useTabState } from "./TabContext";
 function transform(colors = []) { 
   return colors                    
         .slice()
@@ -18,33 +18,26 @@ function colorElement(color,index) {
 }
 
 export const Collection = ({collection}) => {
-  const [colors,setColors] = useState(transform(collection.colors))
+  const {handleTab,selected,updateSelected} = useTabState()
   const [previewState,setPreviewState] = useState(null);
-  const [selected,updateSelected] = useState(colors[0]);
-  
   const handleClick = ({target}) => {
     const color = target.closest('.db-color')
     if (color) {
       const id = color.getAttribute('id');
-      const info = colors.find(c => c._id === id);
+      const info = collection.colors.find(c => c._id === id);
       if (info) {
         updateSelected(info)
       }
     }
   }
 
-  useEffect(() => {
-    console.log('new colors',collection)
-    setColors(transform(collection.colors))
-  },[collection,setColors])
-
   return (
     <>
-      <MiniPreview selected={selected} state={previewState} setState={setPreviewState} />
+      <MiniPreview selected={selected} state={previewState} setState={setPreviewState} toggleEditor={handleTab.bind(this,'editor')} />
       <div className="collection" onClick={handleClick}>
-        {colors && transform(colors).map(colorElement)}
+        {collection.colors && collection.colors.map(colorElement)}
       </div>
-      <Preview color={selected} state={previewState} setState={setPreviewState} />
+      <Preview color={selected} state={previewState} setState={setPreviewState} toggleEditor={handleTab.bind(this,'editor')} />
     </>
 
 

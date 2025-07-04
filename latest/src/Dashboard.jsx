@@ -23,7 +23,7 @@ export const Dashboard = () => {
     } else if (tab === 'home'){
       return <Home collections={collections}/>
     } else if (tab === 'editor'){
-      return <Editor/>
+      return <Editor color={collection.color}/>
     } else if (collection) {
       return <Collection collection={collection}/>
     } else {

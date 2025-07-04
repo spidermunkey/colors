@@ -10,16 +10,21 @@ function useDebouncer(invoke, delay = 1400) {
   },[invoke,delay])
 }
 
+export const ChevronBack = () => (<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" pid="m9uim3ck-010CM55AN84J" height="24" width="24"><title fill="#6c6c6c" pid="m9uim3ck-01TMGCFE79ID">Chevron Back</title><path fill="none" stroke="#6c6c6c" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144" pid="m9uim3ck-02G9M3M9JUK2"></path></svg>) 
+
 export const ColorPalette = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" pid="m91curqy-00204TOJLCNR" height="20" width="20"><path d="M9 20v-1.7l.01-.24L15.07 12h2.94c1.1 0 1.99.89 1.99 2v4a2 2 0 0 1-2 2H9zm0-3.34V5.34l2.08-2.07a1.99 1.99 0 0 1 2.82 0l2.83 2.83a2 2 0 0 1 0 2.82L9 16.66zM0 1.99C0 .9.89 0 2 0h4a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zM4 17a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="#5b5b5bad" pid="m91curqy-00SP8QKIQ1DF"></path></svg>) 
 export const DashboardHeader = () => {
     
-    const { collection, menuActive, setMenuActive, handleTab } = useTabState();
+    const { collection, menuActive, setMenuActive, handleTab, toggleBack, history } = useTabState();
     const { inputRef,active, query, handleInput, setActive } = useSearch();
     return ( 
     <div className="dashboard-header">
       <div className="navigation-header">
         <div className="info-bar">
-            <div className="current-tab">{ active ? 'search' : collection?.name ? collection.name : 'home' }</div>
+            {history.length > 1 && 
+                <div className="btn-toggle-back" onClick={toggleBack}><ChevronBack/></div>
+            }
+            <div className="current-tab" >{ active ? 'search' : collection?.name ? collection.name : 'home' }</div>
         </div>
         <div className="tool-bar">
             <div className="nav-bar">

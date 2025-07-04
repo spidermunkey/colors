@@ -2,6 +2,14 @@ import { useState,useRef,useEffect } from "react";
 import { Color } from "./utils/color";
 import { Slider } from "./utils/mouseTracker";
 import { CopyOutline } from "./MiniPreview";
+  const validate_color = (color) => {
+    let c = color;
+    let fallback_color = new Color({hex:'#1E90FF'})
+    if (!color || !color.hex) {
+      c = fallback_color
+    }
+    return c;
+  }
 export const ColorEditor = ({ color, setColor }) => {
 
   const { hue, saturation, lightness } = color;
@@ -164,8 +172,14 @@ export const ColorEditor = ({ color, setColor }) => {
   )
 }
 export const Editor = ({color}) => {
-  const [current, setCurrent] = useState(new Color({hex:'#1E90FF'}))
+  const [current, setCurrent] = useState(validate_color(color))
   const initial = useRef(current)
+
+  useEffect(() => {
+    let c = validate_color(color)
+    initial.current = c;
+    setCurrent(c)
+  },[color])
   return (
     <div className="editor-modal">
       <div className="modal-wrapper">

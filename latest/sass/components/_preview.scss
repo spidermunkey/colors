@@ -44,13 +44,14 @@ $bdr-light: #cecece64;
   .selected-info {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    min-width: 200px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     color: #454545;
     padding-left: 24px;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-right: 24px;
     // padding-right: 20px;
     .name {
       text-transform: capitalize;
@@ -65,7 +66,7 @@ $bdr-light: #cecece64;
   }
   .controls {
     display: flex;
-    margin-top: 6px;
+    margin-top: 12px;
     .icon {
       display: inline-flex;
       justify-content: center;
@@ -255,6 +256,23 @@ $bdr-light: #cecece64;
       &.animate {
         background-color: hsl(var(--hue),var(--sat),var(--light));
       }
+    }
+    .icon-navigate {
+      position: absolute;
+      top: -48px;
+      right: 38px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      scale: .7;
+      flex: 1;
+      border-radius: 100%;
+      border: 1px solid $bdr-light;
+      background: white;
+      transition: 200ms ease-in-out;
     }
   }
 

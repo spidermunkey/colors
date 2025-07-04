@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { Color, getDarks, getLights, getShades, getTints } from "./utils/color";
 import { Slider } from "./utils/mouseTracker";
 export const CopyOutline = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 512 512" pid="mbi2zcbr-011N0IZ0XY24"><title fill="#000" pid="mbi2zcbr-02EJJUV95T1C">ionicons-v5-e</title><rect x="128" y="128" width="336" height="336" rx="57" ry="57" 
-  style={{fill:"none",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-00TV2JYXWDF4"></rect><path d="M383.5,128l.5-24a56.16,56.16,0,0,0-56-56H112a64.19,64.19,0,0,0-64,64V328a56.16,56.16,0,0,0,56,56h24" 
-  style={{fill:"none",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#000" pid="mbi2zcbr-01OTOQ6EF054"></path></svg>) 
+  style={{fill:"none",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#6c6c6c" pid="mbi2zcbr-00TV2JYXWDF4"></rect><path d="M383.5,128l.5-24a56.16,56.16,0,0,0-56-56H112a64.19,64.19,0,0,0-64,64V328a56.16,56.16,0,0,0,56,56h24" 
+  style={{fill:"none",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"32px"}} fill="none" stroke="#6c6c6c" pid="mbi2zcbr-01OTOQ6EF054"></path></svg>) 
+
+export const OpenFullScreen = () => (<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" pid="m9uim3d1-00TM1NE6Q8U5" height="24" width="24"><title fill="#6c6c6c" pid="m9uim3d1-002SFMJYBRAB">Open</title><path d="M384 224v184a40 40 0 01-40 40H104a40 40 0 01-40-40V168a40 40 0 0140-40h167.48M336 64h112v112M224 288L440 72" fill="none" stroke="#6c6c6c" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" pid="m9uim3d1-02EDLRRLQHF8"></path></svg>) 
 
 function colorElement(hex,index) {
   return <div className="color-wrapper" key={index} hex={hex} style={{background:hex}}></div>
@@ -24,7 +26,6 @@ const Lights = ({color}) => {
   )
 }
 const Darks = ({color}) => {
-  console.log(color)
   return (
     <div className="preview-modal editor"> 
       {getDarks(color.hex).map(colorElement)} 
@@ -37,7 +38,7 @@ const Err = () => {
   )
 }
 
-export const ColorEditor = ({ color, setColor }) => {
+export const ColorEditor = ({ color, setColor, toggleEditor }) => {
   const { hue, saturation, lightness } = color;
   const [current,setCurrent] = useState(color);
 
@@ -152,6 +153,8 @@ export const ColorEditor = ({ color, setColor }) => {
   return (
     <div className="editor">
       <div class="box current-color">
+        <div className="icon-navigate" onClick={toggleEditor}><OpenFullScreen/></div>
+
         <div className="icon copy" ref={copyRef} onClick={copy}>
           <CopyOutline/>
         </div>
@@ -223,7 +226,7 @@ export const ColorVariations = ({tabIndex,color}) => {
 
   )
 }
-export const Preview = ({ color, state, setState }) => {
+export const Preview = ({ color, state, setState, toggleEditor }) => {
   const [tabIndex,setTabIndex] = useState("0");
   const [current,setCurrent] = useState(color);
   const initial = useRef(color || new Color({hex:'#fff'}));
@@ -241,7 +244,7 @@ export const Preview = ({ color, state, setState }) => {
         <div className="modal-label">Preview</div>
         <div className="btn-close" onClick={close}> close </div>
       </div>
-      <ColorEditor color={initial.current} setColor={setCurrent}/>
+      <ColorEditor color={initial.current} setColor={setCurrent} toggleEditor={() => toggleEditor(current)}/>
       <div className="tab-tray">
         <div className="tab" tab="darks" tabIndex="0" onClick={() => setTabIndex("0")}>Darker</div>
         <div className="tab" tab="lights" tabIndex="1" onClick={() => setTabIndex("1")}>Lighter</div>
