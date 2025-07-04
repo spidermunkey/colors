@@ -97,7 +97,7 @@
             background-color: #f3f3f3;
           }
           &.animate {
-            background-color: hsl(var(--hue),var(--sat),var(--light));
+            background-color: hsl(var(--editor-hue),var(--editor-sat),var(--editor-light));
           }
         }
         .hue-wheel {
@@ -321,6 +321,7 @@
           color: hsl(var(--editor-hue),var(--editor-sat),var(--editor-light));
         }
         &[component='button'] {
+          cursor: pointer;
           color: hsl(var(--editor-hue),var(--editor-sat),var(--editor-light));
           display: inline-flex;
           width: fit-content;
