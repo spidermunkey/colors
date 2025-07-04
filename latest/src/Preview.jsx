@@ -37,7 +37,7 @@ const Err = () => {
   )
 }
 
-const HSL_Editor = ({ color, setColor }) => {
+export const ColorEditor = ({ color, setColor }) => {
   const { hue, saturation, lightness } = color;
   const [current,setCurrent] = useState(color);
 
@@ -133,10 +133,7 @@ const HSL_Editor = ({ color, setColor }) => {
     satSlider.current.setPercent(color.saturation)
     lightSlider.current.setPercent(color.lightness)
   }
-
   const copyRef = useRef();
-
-
   const copy = () => {
     copyRef.current.classList.add('animate')
     window.navigator.clipboard.writeText(current.hex)
@@ -197,37 +194,10 @@ const HSL_Editor = ({ color, setColor }) => {
 
   )
 }
-
-export const Preview = ({ color, state, setState }) => {
-  const [tabIndex,setTabIndex] = useState(0);
-  const [current,setCurrent] = useState(color);
-  const initial = useRef(color || new Color({hex:'#fff'}));
+export const ColorVariations = ({tabIndex,color}) => {
   const successRef = useRef();
-  const close = () => setState(null)
-  useEffect(() => {
-    let value = color
-    if (!color) value =  new Color({hex:'#fff'});
-    initial.current = value
-    setCurrent(value)
-  },[color])
   return (
-    
-    <div className={['color-preview', state == 'active' ? 'active' : false].filter(Boolean).join(' ')} >
-      <div className="modal-header">
-        <div className="modal-label">Preview</div>
-        <div className="btn-close" onClick={close}> close </div>
-      </div>
-      {/* <div className="current-color">
-        <div className="current-color-preview" style={{background: color.hex}}></div>
-      </div> */}
-      <HSL_Editor color={initial.current} setColor={setCurrent}/>
-      <div className="tab-tray">
-        <div className="tab" tab="darks" tabIndex="0" onClick={() => setTabIndex("0")}>Darker</div>
-        <div className="tab" tab="lights" tabIndex="1" onClick={() => setTabIndex("1")}>Lighter</div>
-        <div className="tab" tab="shades" tabIndex="2" onClick={() => setTabIndex("2")}>Shades</div>
-        <div className="tab" tab="tints" tabIndex="3" onClick={() => setTabIndex("3")}>Tints</div>
-      </div>
-      <div className="variation-modal" onDoubleClick={({target}) => {
+        <div className="variation-modal" onDoubleClick={({target}) => {
         const variation = target.closest('.color-wrapper');
         if (variation) {
           const hex = variation.getAttribute('hex');
@@ -241,15 +211,44 @@ export const Preview = ({ color, state, setState }) => {
         }
       }}>
       {
-        tabIndex == "0" ? <Darks color={current} /> :
-        tabIndex == "1" ? <Lights color={current} /> :
-        tabIndex == "2" ? <Tints color={current} /> :
-        tabIndex == "3" ? <Shades color={current} /> :
+        tabIndex == "0" ? <Darks color={color} /> :
+        tabIndex == "1" ? <Lights color={color} /> :
+        tabIndex == "2" ? <Tints color={color} /> :
+        tabIndex == "3" ? <Shades color={color} /> :
         <Err/>
       }
+        <div className="success-animation" ref={successRef}><div className="success-label"> successfully copied to clipboard </div></div>
+      
       </div>
 
-      <div className="success-animation" ref={successRef}><div className="success-label"> successfully copied to clipboard </div></div>
+  )
+}
+export const Preview = ({ color, state, setState }) => {
+  const [tabIndex,setTabIndex] = useState("0");
+  const [current,setCurrent] = useState(color);
+  const initial = useRef(color || new Color({hex:'#fff'}));
+  const close = () => setState(null)
+  useEffect(() => {
+    let value = color
+    if (!color) value =  new Color({hex:'#fff'});
+    initial.current = value
+    setCurrent(value)
+  },[color])
+  return (
+    
+    <div id='color-preview' className={state == 'active' && 'active'} >
+      <div className="modal-header">
+        <div className="modal-label">Preview</div>
+        <div className="btn-close" onClick={close}> close </div>
+      </div>
+      <ColorEditor color={initial.current} setColor={setCurrent}/>
+      <div className="tab-tray">
+        <div className="tab" tab="darks" tabIndex="0" onClick={() => setTabIndex("0")}>Darker</div>
+        <div className="tab" tab="lights" tabIndex="1" onClick={() => setTabIndex("1")}>Lighter</div>
+        <div className="tab" tab="shades" tabIndex="2" onClick={() => setTabIndex("2")}>Shades</div>
+        <div className="tab" tab="tints" tabIndex="3" onClick={() => setTabIndex("3")}>Tints</div>
+      </div>
+      <ColorVariations color={current} tabIndex={tabIndex}/>
 
     </div>
   )

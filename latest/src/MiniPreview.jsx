@@ -34,7 +34,7 @@ export const MiniPreview = ({selected,state,setState}) => {
     console.log('selected',selected)
   })
   return (
-      <div className={["mini-preview",state == 'active' ? false : 'active'].filter(Boolean).join(' ')}>
+      <div id='mini-preview' className={state !== 'active' && 'active'}>
         <div className="selected-color" 
         style={{ background: selected?.hex }}
         onClick={() => setActive()}></div>

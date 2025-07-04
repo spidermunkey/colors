@@ -2,8 +2,8 @@ $padding: 10px 24px;
 $border: #ccc;
 $bdr-light: #cecece64;
 
-.mini-preview,
-.color-preview {
+#mini-preview,
+#color-preview {
   position: absolute;
   .a2c-menu {
     opacity: 0;
@@ -17,7 +17,7 @@ $bdr-light: #cecece64;
   }
 }
 
-.mini-preview {
+#mini-preview {
   position: fixed;
   border: 1px solid $bdr-light;
   right: 102px;
@@ -184,7 +184,7 @@ $bdr-light: #cecece64;
 
 }
 
-.color-preview {
+#color-preview {
   position: fixed;
   right: 0;
   bottom: 0;
