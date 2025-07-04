@@ -165,15 +165,11 @@ export const ColorEditor = ({ color, setColor }) => {
 }
 export const Editor = () => {
   const [color,setColor] = useState(new Color({hex:'#1E90FF'}))
-  const [current,setCurrent] = useState(color);
   const initial = useRef(color)
   return (
     <div className="editor-modal">
       <div className="modal-wrapper">
         <div className="color-card">
-          <div className="card-info info">
-            {/* <div className="name-label info-label" component='name'>Name</div> */}
-          </div>
           <div className="card-editor editor">
             <ColorEditor color={initial.current} setColor={setColor}/>
             <div className="btn-add-preset">Save Preset</div>
@@ -185,8 +181,7 @@ export const Editor = () => {
             <div className="preview-modal" modal='preview'>
               <div className="text-column col col-1">
                 <div className="preview-component" component='text'>{color.hex}</div>
-                {/* <div className="preview-component" component='text'>Text Preview</div> */}
-                <div className="preview-component" component='button'>Button</div>
+                <div className="preview-component" component='button'>Add To Collection</div>
                 <div className="preview-component" component='paragraph'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus perferendis, quis a ab beatae sed, autem magnam tenetur dolore ullam reprehenderit iste et odio eos inventore quas voluptatibus, dolores velit?</div>
               </div>
               

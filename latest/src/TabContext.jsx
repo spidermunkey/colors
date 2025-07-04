@@ -34,6 +34,7 @@ export const TabProvider = ({children}) => {
         setCollection({name:'home'})
         setTab(tab)
       } else if (tab === 'editor'){
+        console.log('here')
         setCollection({name:'editor'})
         setTab(tab)
       }

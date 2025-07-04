@@ -15,7 +15,8 @@
       padding-top: 40px;
       margin-left: 12px;
       padding-left: 12px;
-      height: 40%;
+      margin-top: 24px;
+      margin-bottom: 48px;
       .card-info {
         display: inline-flex;
         flex-direction: column;
@@ -57,6 +58,12 @@
           bottom: 0;
           right: 8px;
           border-radius: 8px;
+          cursor: pointer;
+          color: #6c6c6c;
+          opacity: .75;
+          &:hover {
+            opacity: 1;
+          }
         }
 
       }
@@ -138,6 +145,7 @@
               height: var(--width);
               aspect-ratio: 1;
               z-index: 1;
+              opacity: .67;
               background: conic-gradient(hsla(0, 100%, 50%, 1),hsla(10, 100%, 50%, 1),hsla(20, 100%, 50%, 1),hsla(30, 100%, 50%, 1),hsla(40, 100%, 50%, 1),hsla(50, 100%, 50%, 1),hsla(60, 100%, 50%, 1),hsla(70, 100%, 50%, 1),hsla(80, 100%, 50%, 1),hsla(90, 100%, 50%, 1),hsla(100, 100%, 50%, 1),hsla(110, 100%, 50%, 1),hsla(120, 100%, 50%, 1),hsla(130, 100%, 50%, 1),hsla(140, 100%, 50%, 1),hsla(150, 100%, 50%, 1),hsla(160, 100%, 50%, 1),hsla(170, 100%, 50%, 1),hsla(180, 100%, 50%, 1),hsla(190, 100%, 50%, 1),hsla(200, 100%, 50%, 1),hsla(210, 100%, 50%, 1),hsla(220, 100%, 50%, 1),hsla(230, 100%, 50%, 1),hsla(240, 100%, 50%, 1),hsla(250, 100%, 50%, 1),hsla(260, 100%, 50%, 1),hsla(270, 100%, 50%, 1),hsla(280, 100%, 50%, 1),hsla(290, 100%, 50%, 1),hsla(300, 100%, 50%, 1),hsla(310, 100%, 50%, 1),hsla(320, 100%, 50%, 1),hsla(330, 100%, 50%, 1),hsla(340, 100%, 50%, 1),hsla(350, 100%, 50%, 1),hsla(360, 100%, 50%, 1));
               /* border: 1px solid rgba(211, 211, 211, 0.5293); */
               box-shadow: 0px 0px 18px -1px rgba(91, 90, 90, 0.131),
@@ -186,15 +194,20 @@
                 &.hue-bar,
                 &.sat-bar,
                 &.light-bar {
+                  opacity: .67;
+
                     margin: 12px auto;
                     height: calc(var(--width) * .08);
                     height: 10px;
                     width: var(--width);
-                    opacity: .8;
                     border: 0;
                     position: relative;
                     display: flex;
                     align-items: center;
+                    transition: 200ms ease;
+                    &:hover {
+                      opacity: 1;
+                    }
                 }
             
                 .input-thumb {
@@ -205,6 +218,7 @@
                     height: calc((var(--width) * .08) + 4px);
                     aspect-ratio: 1;
                     border-radius: 50%;
+                    cursor: pointer;
                     // box-shadow: 0 0 0 3px white,
                     //             1px 1px 5px 3px rgba(0, 0, 0, 0.223),
                     //             inset 0 0 0 3px white;
@@ -226,9 +240,12 @@
             .val-label, .val-label input {
                 text-align: center;
                 line-height: 32px;
-                color: grey;
+                color: #6c6c6c;
+                opacity: .75;
                 border-radius: 2px;
                 font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.05em;
             }
 
             .val-label input {
@@ -239,6 +256,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 width: 32px;
                 height: 32px;
+                padding: 4px;
                 vertical-align: middle;
                 &:invalid {
                     color: rgb(216, 57, 57);

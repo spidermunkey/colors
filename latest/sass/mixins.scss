@@ -1,5 +1,7 @@
 $border-light: #454545;
 $color: #6c6c6c;
+// opacity: .75
+$text-color-light: #6c6c6cb4; 
 $black: #222;
 $slate: #535353;
 $padding: 10px 24px;
@@ -19,7 +21,6 @@ $border-super-light: rgba(128, 128, 128, 0.1);
 
 $white-glow-overlay: radial-gradient(#ffffff10 50%,#e2e2e207);
 $violet: #4c56e1;
-
 @mixin hide() {
   visibility: hidden;
   opacity: 0;
