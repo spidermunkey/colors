@@ -201,6 +201,8 @@ export class Slider {
     }
     handleDrag(event) {
         event.stopImmediatePropagation();
+            event.preventDefault()
+
         let initialMouseUpIfAny = document.onmouseup;
         let controller = new AbortController();
         let state;
