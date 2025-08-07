@@ -132,4 +132,4 @@ async function syncOffline(){
 
 // compileMetaData();
 // updateCollectionSchema();
-syncOffline();
+// syncOffline();

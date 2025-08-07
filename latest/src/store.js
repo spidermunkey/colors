@@ -3,10 +3,10 @@ import { get, search, post } from "./utils/api";
 export const store = {
 
   meta: {
-    ...createStore('api/')
+    ...createStore('/colors/meta')
   },
   async collection(cid){
-    return get(`api/collections/${cid}`);
+    return get(`/colors/collections/${cid}`);
   },
 
   async project(projectName){
@@ -14,21 +14,21 @@ export const store = {
   },
 
   async collections(){
-    return get('api/meta/collections');
+    return get('/colors/meta/collections');
   },
 
   async projects(){
-    return get('api/meta/projects');
+    return get('/colors/meta/projects');
   },
 
   async search({query}){
-    return search('/api/search',{
+    return search('//colors/search',{
       query:query
     })
   },
 
   async update(cid,color){
-    return post(`api/collections/${cid}`,{
+    return post(`/colors/collections/${cid}`,{
       color,
     })
   },

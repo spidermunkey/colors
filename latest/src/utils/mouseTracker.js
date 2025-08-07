@@ -44,6 +44,7 @@ export class MouseTrackingSlider {
         this.onMouseUp({x,y,event});
     }
 
+
 }
 
 class Canvas extends MouseTrackingSlider {
@@ -198,6 +199,8 @@ export class Slider {
         };
         this.handle.addEventListener( 'mousedown', this.handleDrag.bind(this), true );
         this.track.addEventListener( 'click', this.handleClick.bind(this), true );
+        this.container.addEventListener('keydown',this.handleCursor.bind(this), true)
+
     }
     handleDrag(event) {
         event.stopImmediatePropagation();
@@ -301,5 +304,35 @@ export class Slider {
     detatch(){
       this.handle.removeEventListener( 'mousedown', this.handleDrag.bind(this), true );
         this.track.removeEventListener( 'click', this.handleClick.bind(this), true );
+    }
+    handleCursor(event){
+        console.log(event)
+        let which = event.which;
+        let key = event.key;
+
+        let cursorRight = which == 39 || key === 'ArrowRight';
+        let cursorLeft = which == 37 || key === 'ArrowLeft';
+        let cursorDown = which == 40 || key === 'ArrowDown';
+        let cursorUp = which == 38 || key === 'ArrowUp';
+
+        cursorRight && this.handleCursorRight(event)
+        cursorLeft && this.handleCursorLeft(event)
+        cursorUp && this.handleCursorUp(event)
+        cursorDown && this.handleCursorDown(event)
+        return event;
+    }
+    handleCursorRight(){
+        if (actions.cursorRight) actions.cursorRight(this.state)
+    }
+    handleCursorLeft(){
+        if (actions.cursorLeft) actions.cursorLeft(this.state)
+
+    }
+    handleCursorDown(){
+        if (actions.cursorDown) actions.cursorDown(this.state)
+
+    }
+    handleCursorUp(){
+        if (actions.cursorUp) actions.cursorUp(this.state)
     }
 }

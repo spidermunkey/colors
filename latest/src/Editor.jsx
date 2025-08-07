@@ -2,16 +2,17 @@ import { useState,useRef,useEffect } from "react";
 import { Color } from "./utils/color";
 import { Slider } from "./utils/mouseTracker";
 import { CopyOutline } from "./MiniPreview";
-  const validate_color = (color) => {
-    let c = color;
-    let fallback_color = new Color({hex:'#1E90FF'})
-    if (!color || !color.hex) {
-      c = fallback_color
-    }
-    return c;
-  }
-export const ColorEditor = ({ color, setColor }) => {
 
+const validate_color = (color) => {
+  let c = color;
+  let fallback_color = new Color({hex:'#1E90FF'});
+  if (!color || !color.hex) {
+    c = fallback_color;
+  }
+  return c;
+}
+
+export const ColorEditor = ({ color, setColor }) => {
   const { hue, saturation, lightness } = color;
   const [current,setCurrent] = useState(color);
 
@@ -69,7 +70,11 @@ export const ColorEditor = ({ color, setColor }) => {
       targetElement: huebarRef.current,
       actions: {
         onMouseMove: ({deg}) => setHue(deg),
-        onMouseUp: ({deg}) => setHue(deg)
+        onMouseUp: ({deg}) => setHue(deg),
+        cursorRight: ({deg}) => {
+          console.log(this)
+          setHue()
+        }
       }
     })
     satSlider.current = new Slider({
@@ -116,6 +121,7 @@ export const ColorEditor = ({ color, setColor }) => {
   const copyVar = () => {
 
   }
+
   useEffect(() => {
     updateStyles();
     hydrateSliders(color);
@@ -168,18 +174,19 @@ export const ColorEditor = ({ color, setColor }) => {
         </div>
       </div>
     </div>
-
   )
 }
+
 export const Editor = ({color}) => {
-  const [current, setCurrent] = useState(validate_color(color))
-  const initial = useRef(current)
+  const [current, setCurrent] = useState(validate_color(color));
+  const initial = useRef(current);
 
   useEffect(() => {
-    let c = validate_color(color)
+    let c = validate_color(color);
     initial.current = c;
-    setCurrent(c)
+    setCurrent(c);
   },[color])
+
   return (
     <div className="editor-modal">
       <div className="modal-wrapper">
@@ -190,7 +197,6 @@ export const Editor = ({color}) => {
           </div>
         </div>
         <div className="color-preview">
-
           <div className="tab-modal">
             <div className="preview-modal" modal='preview'>
               <div className="text-column col col-1">
@@ -198,7 +204,6 @@ export const Editor = ({color}) => {
                 <div className="preview-component" component='button'>Add To Collection</div>
                 <div className="preview-component" component='paragraph'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus perferendis, quis a ab beatae sed, autem magnam tenetur dolore ullam reprehenderit iste et odio eos inventore quas voluptatibus, dolores velit?</div>
               </div>
-              
               <div className="modal-column col col-2">
                 <div className="preview-component" component="modal"></div>
               </div>
@@ -206,8 +211,7 @@ export const Editor = ({color}) => {
           </div>
         </div>
       </div>
-
       <div className="modal-options"></div>
     </div>
-  )   
+  )
 }

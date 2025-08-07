@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/colors/',
   plugins: [
     tailwindcss(),
     react()
@@ -11,11 +12,15 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3330',
+        target: 'http://localhost:1280/colors',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }
     }
+  },
+  build: {
+    outDir: path.resolve(__dirname,'../../../project-server/public/colors'),
+    emptyOutDir: true,
   },
   resolve: {
     alias: {
